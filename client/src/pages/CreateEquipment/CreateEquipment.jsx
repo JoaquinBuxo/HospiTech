@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 import Navbar from '../../components/Navbar/Navbar';
+import * as ApiService from '../../utils/api';
 
-import { CheckCircle, CloseRounded } from '@mui/icons-material';
+import { CheckCircle, CloseRounded, Report } from '@mui/icons-material';
 
 import {
   Sheet,
@@ -23,7 +24,8 @@ const CreateEquipment = () => {
   const [description, setDescription] = useState('');
   const [owner, setOwner] = useState('');
   const [lastRevision, setLastRevision] = useState('');
-  const [alert, setAlert] = useState(false);
+  const [alertSuccess, setAlertSuccess] = useState(false);
+  const [alertError, setAlertError] = useState(false);
 
   const handleModelChange = (event) => {
     setModel(event.target.value);
@@ -54,14 +56,28 @@ const CreateEquipment = () => {
   };
 
   const handleSubmit = (event) => {
-    console.log({ model });
-    setAlert(true);
+    try {
+      const equipmentData = {
+        model,
+        serialNumber,
+        type,
+        condition,
+        description,
+        ownerId: 3, // TODO: it will be related with the user hospitalId
+        lastRevision: new Date(lastRevision),
+      };
+      ApiService.createEquipment(equipmentData);
+      setAlertSuccess(true);
+    } catch (error) {
+      setAlertError(true);
+      console.log(error);
+    }
   };
 
   return (
     <div className='create-equipment'>
       <Navbar></Navbar>
-      {alert && (
+      {alertSuccess && (
         <Alert
           key='Success'
           sx={{ alignItems: 'flex-start' }}
@@ -76,7 +92,7 @@ const CreateEquipment = () => {
               variant='soft'
               size='sm'
               color='success'
-              onClick={() => setAlert(false)}
+              onClick={() => setAlertSuccess(false)}
             >
               <CloseRounded />
             </IconButton>
@@ -92,6 +108,39 @@ const CreateEquipment = () => {
           </div>
         </Alert>
       )}
+
+      {alertError && (
+        <Alert
+          key='Error'
+          sx={{ alignItems: 'flex-start' }}
+          startDecorator={React.cloneElement(<Report />, {
+            sx: { mt: '2px', mx: '4px' },
+            fontSize: 'xl2',
+          })}
+          variant='soft'
+          color='danger'
+          endDecorator={
+            <IconButton
+              variant='soft'
+              size='sm'
+              color='error'
+              onClick={() => setAlertError(false)}
+            >
+              <CloseRounded />
+            </IconButton>
+          }
+        >
+          <div>
+            <Typography fontWeight='lg' mt={0.25}>
+              Error
+            </Typography>
+            <Typography fontSize='sm' sx={{ opacity: 0.8 }}>
+              There was some error.
+            </Typography>
+          </div>
+        </Alert>
+      )}
+
       <main>
         <Sheet
           sx={{
@@ -156,15 +205,6 @@ const CreateEquipment = () => {
                 value={description}
                 onChange={handleDescriptionChange}
                 placeholder="The Da Vinci System consists of a surgeon's console that is typically in the same room as the patient, and a patient-side cart with three to four interactive robotic arms (depending on the model) controlled from the console. The arms hold objects, and can act as scalpels, scissors, bovies, or graspers. The final arm controls the 3D cameras.[6] The surgeon uses the controls of the console to manoeuvre the patient-side cart's robotic arms. The system always requires a human operator."
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Hospital Owner</FormLabel>
-              <Input
-                name='owner'
-                value={owner}
-                onChange={handleOwnerChange}
-                placeholder="Addenbrooke's Hospital"
               />
             </FormControl>
             <FormControl>

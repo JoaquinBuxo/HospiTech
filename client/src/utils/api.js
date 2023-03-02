@@ -5,3 +5,13 @@ export const getAllEquipments = async () => {
   const response = await getData.json();
   return response;
 };
+
+export const createEquipment = async (equipment) => {
+  const response = await fetch(`${baseUrl}/equipment`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(equipment),
+  });
+  const responseJson = await response.json();
+  return responseJson;
+};
