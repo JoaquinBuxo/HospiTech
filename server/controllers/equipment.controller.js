@@ -1,42 +1,42 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-const createHospital = async (req, res) => {
+const createEquipment = async (req, res) => {
   try {
-    const createHospital = await prisma.hospital.create({
+    const createEquipment = await prisma.equipment.create({
       data: req.body,
     });
     res.status(200);
-    res.send(createHospital);
+    res.send(createEquipment);
   } catch (error) {
     console.log(error);
     res.status(300);
   }
 };
 
-const getAllHospitals = async (req, res) => {
+const getAllEquipments = async (req, res) => {
   try {
-    const getHopsitals = await prisma.hospital.findMany();
+    const getEquipments = await prisma.equipment.findMany();
     res.status(200);
-    res.send(getHopsitals);
+    res.send(getEquipments);
   } catch (error) {
     console.log(error);
     res.status(300);
   }
 };
 
-const getHospitalById = async (req, res) => {
+const getEquipmentById = async (req, res) => {
   try {
     const { id } = req.params;
-    const hospital = await prisma.hospital.findUnique({
+    const equipment = await prisma.equipment.findUnique({
       where: { id: parseInt(id) },
     });
     res.status(200);
-    res.send(req.body);
+    res.send(equipment);
   } catch (error) {
     console.log(error);
     res.status(300);
   }
 };
 
-export { createHospital, getAllHospitals, getHospitalById };
+export { createEquipment, getAllEquipments, getEquipmentById };
