@@ -2,17 +2,18 @@ import React from 'react';
 import ItemEquipment from '../ItemEquipment/ItemEquipment';
 import './ListEquipments.css';
 
+import { Grid } from '@mui/joy';
+
 const ListEquipments = ({ equipments }) => {
   return (
-    <div className='list-equipments'>
+    <Grid container spacing={2} className='list-equipments' sx={{ margin: 0 }}>
       {equipments &&
         equipments.map((equipment) => (
-          <ItemEquipment
-            key={equipment.id}
-            equipment={equipment}
-          ></ItemEquipment>
+          <Grid key={equipment.id} xs={3}>
+            <ItemEquipment equipment={equipment}></ItemEquipment>
+          </Grid>
         ))}
-    </div>
+    </Grid>
   );
 };
 
