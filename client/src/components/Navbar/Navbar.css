@@ -1,0 +1,14 @@
+.navbar {
+  border: 1px solid red;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.user-navbar {
+  display: flex;
+  align-items: center;
+}
