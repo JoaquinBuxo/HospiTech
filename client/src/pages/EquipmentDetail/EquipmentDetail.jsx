@@ -25,7 +25,7 @@ const EquipmentDetail = () => {
       <Navbar></Navbar>
       <div className='container-equipment-detail'>
         <div className='image-equipment'>
-          <img src='' alt='' />
+          <img src={equipment.model} alt={equipment.model} />
         </div>
         <div className='features-equipment'>
           <div className='model-equipment'>

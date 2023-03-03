@@ -1,3 +1,17 @@
 .container-equipment-detail {
-  padding: 30px;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.image-equipment {
+  width: 500px;
+  height: 100%;
+  padding: 20px;
+}
+
+.features-equipment {
+  width: 500px;
+  padding: 20px;
 }
