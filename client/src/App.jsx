@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 // styles
 import './App.css';
@@ -12,18 +13,29 @@ import CreateEquipment from './pages/CreateEquipment/CreateEquipment';
 
 function App() {
   return (
-    <div className='App'>
-      <CssVarsProvider>
-        <Router>
-          <Routes>
-            <Route path='/' element={<Equipments />} />
-            <Route path='/equipments' element={<Equipments />} />
-            <Route path='/create-equipment' element={<CreateEquipment />} />
-            <Route path='/equipment-detail/:id' element={<EquipmentDetail />} />
-          </Routes>
-        </Router>
-      </CssVarsProvider>
-    </div>
+    <Auth0Provider
+      domain='dev-xbvvtrjka5pzpdpv.us.auth0.com'
+      clientId='1yjJDCr99TgiXTMo0EI1QEitPnzGkUtE'
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+      }}
+    >
+      <div className='App'>
+        <CssVarsProvider>
+          <Router>
+            <Routes>
+              <Route path='/' element={<Equipments />} />
+              <Route path='/equipments' element={<Equipments />} />
+              <Route path='/create-equipment' element={<CreateEquipment />} />
+              <Route
+                path='/equipment-detail/:id'
+                element={<EquipmentDetail />}
+              />
+            </Routes>
+          </Router>
+        </CssVarsProvider>
+      </div>
+    </Auth0Provider>
   );
 }
 
