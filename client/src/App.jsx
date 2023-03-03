@@ -7,7 +7,7 @@ import '@fontsource/public-sans';
 
 // pages
 import Equipments from './pages/Equipments/Equipments';
-import EquipmentDetail from './pages/EquipmentDetail';
+import EquipmentDetail from './pages/EquipmentDetail/EquipmentDetail';
 import CreateEquipment from './pages/CreateEquipment/CreateEquipment';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
             <Route path='/' element={<Equipments />} />
             <Route path='/equipments' element={<Equipments />} />
             <Route path='/create-equipment' element={<CreateEquipment />} />
-            <Route path='/equipment-detail' element={<EquipmentDetail />} />
+            <Route path='/equipment-detail/:id' element={<EquipmentDetail />} />
           </Routes>
         </Router>
       </CssVarsProvider>

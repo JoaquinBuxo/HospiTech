@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ItemEquipment from '../ItemEquipment/ItemEquipment';
 import './ListEquipments.css';
 
@@ -10,7 +11,9 @@ const ListEquipments = ({ equipments }) => {
       {equipments &&
         equipments.map((equipment) => (
           <Grid key={equipment.id} xs={3}>
-            <ItemEquipment equipment={equipment}></ItemEquipment>
+            <Link to={`/equipment-detail/${equipment.id}`}>
+              <ItemEquipment equipment={equipment}></ItemEquipment>
+            </Link>
           </Grid>
         ))}
     </Grid>
