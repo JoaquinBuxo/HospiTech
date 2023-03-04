@@ -11,11 +11,11 @@ datasource db {
 }
 
 model Hospital {
-  id                   Int           @id @default(autoincrement())
+  id                   String        @id @default(uuid())
   name                 String
   address              String
-  email                String
-  phone                String
+  email                String        @unique
+  phone                String        @unique
   image                String?
   description          String?
   country              String
@@ -26,7 +26,7 @@ model Hospital {
 }
 
 model User {
-  id               Int      @id @default(autoincrement())
+  id               String   @id @default(uuid())
   name             String
   email            String
   password         String
@@ -34,13 +34,13 @@ model User {
   image            String?
   status           String
   hospital         Hospital @relation(fields: [hospitalId], references: [id])
-  hospitalId       Int
+  hospitalId       String
   registrationDate DateTime
   accountStatus    String
 }
 
 model Equipment {
-  id           Int           @id @default(autoincrement())
+  id           String        @id @default(uuid())
   type         String
   model        String
   condition    String
@@ -48,22 +48,23 @@ model Equipment {
   serialNumber String
   images       String[]
   owner        Hospital      @relation(fields: [ownerId], references: [id])
-  ownerId      Int
+  ownerId      String
+  createdAt    DateTime      @default(now())
   lastRevision DateTime?
   repairs      String[]
   Transaction  Transaction[]
 }
 
 model Transaction {
-  id                    Int       @id @default(autoincrement())
+  id                    String    @id @default(uuid())
   date                  DateTime
   amount                Float
   paymentMethod         String
   donorHospital         Hospital  @relation("donorHospital", fields: [donorHospitalId], references: [id])
-  donorHospitalId       Int
+  donorHospitalId       String
   beneficiaryHospital   Hospital  @relation("beneficiaryHospital", fields: [beneficiaryHospitalId], references: [id])
-  beneficiaryHospitalId Int
+  beneficiaryHospitalId String
   status                String?
   equipment             Equipment @relation(fields: [equipmentId], references: [id])
-  equipmentId           Int
+  equipmentId           String
 }
