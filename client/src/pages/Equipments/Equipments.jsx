@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withAuth } from '../../Auth/withAuth';
 
 // components
 import Navbar from '../../components/Navbar/Navbar';
@@ -6,13 +7,12 @@ import ListEquipments from '../../components/ListEquipments/ListEquipments';
 import FilterBar from '../../components/FilterBar/FilterBar';
 
 // styles
-import { Grid, Card } from '@mui/joy';
 import './Equipments.css';
 
 // api
 import * as ApiService from '../../utils/api';
 
-const Equipments = () => {
+const Equipments = ({ Auth }) => {
   const [equipments, setEquipments] = useState([]);
 
   const getAllEquipments = async () => {
@@ -27,7 +27,7 @@ const Equipments = () => {
 
   return (
     <div className='equipments'>
-      <Navbar></Navbar>
+      <Navbar Auth={Auth}></Navbar>
       <div className='container-equipments'>
         <FilterBar></FilterBar>
         <ListEquipments equipments={equipments}></ListEquipments>
@@ -36,4 +36,4 @@ const Equipments = () => {
   );
 };
 
-export default Equipments;
+export default withAuth(Equipments);

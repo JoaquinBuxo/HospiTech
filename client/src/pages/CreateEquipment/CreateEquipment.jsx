@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withAuth } from '../../Auth/withAuth';
 
 import Navbar from '../../components/Navbar/Navbar';
 import * as ApiService from '../../utils/api';
@@ -16,7 +17,7 @@ import {
   IconButton,
 } from '@mui/joy';
 
-const CreateEquipment = () => {
+const CreateEquipment = ({ Auth }) => {
   const [model, setModel] = useState('');
   const [serialNumber, setSerialNumber] = useState('');
   const [type, setType] = useState('');
@@ -76,7 +77,7 @@ const CreateEquipment = () => {
 
   return (
     <div className='create-equipment'>
-      <Navbar></Navbar>
+      <Navbar Auth={Auth}></Navbar>
       {alertSuccess && (
         <Alert
           key='Success'
@@ -228,4 +229,4 @@ const CreateEquipment = () => {
   );
 };
 
-export default CreateEquipment;
+export default withAuth(CreateEquipment);

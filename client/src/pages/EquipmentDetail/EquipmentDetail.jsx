@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withAuth } from '../../Auth/withAuth';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import './EquipmentDetail.css';
@@ -6,14 +7,13 @@ import './EquipmentDetail.css';
 // api
 import * as ApiService from '../../utils/api';
 
-const EquipmentDetail = () => {
+const EquipmentDetail = ({ Auth }) => {
   const [equipment, setEquipment] = useState({});
   const { id } = useParams();
 
   const getEquipment = async () => {
     const equipment = await ApiService.getEquipmentById(id);
     setEquipment(equipment);
-    console.log(equipment);
   };
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const EquipmentDetail = () => {
 
   return (
     <div className='equipment-detail'>
-      <Navbar></Navbar>
+      <Navbar Auth={Auth}></Navbar>
       <div className='container-equipment-detail'>
         <div className='image-equipment'>
           <img src={equipment.model} alt={equipment.model} />
@@ -57,4 +57,4 @@ const EquipmentDetail = () => {
   );
 };
 
-export default EquipmentDetail;
+export default withAuth(EquipmentDetail);

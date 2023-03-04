@@ -10,7 +10,12 @@ export const withAuth = (Component) => {
     }
 
     if (!Auth.isAuthenticated) {
-      return <div>You are not logged!</div>;
+      return (
+        <div>
+          You are not logged!
+          <button onClick={() => Auth.loginWithRedirect()}>Log In</button>
+        </div>
+      );
     }
 
     return <Component {...props} Auth={Auth} />;

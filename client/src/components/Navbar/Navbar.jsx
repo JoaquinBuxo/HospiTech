@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Avatar, Button, Menu, MenuItem, Link } from '@mui/joy';
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import './Navbar.css';
-import { withAuth } from '../../Auth/withAuth';
 
 const Navbar = ({ Auth }) => {
   // manage menu
@@ -19,14 +17,12 @@ const Navbar = ({ Auth }) => {
   };
 
   const logoutSession = () => {
-    // logout({ logoutParams: { returnTo: window.location.origin } });
-    Auth.logout({ returnTo: `${window.location.origin}/login` });
+    Auth.logout({ returnTo: `${window.location.origin}` });
   };
 
   return (
     <div className='navbar'>
       <div className='logo'>LOGO</div>
-      <button onClick={() => Auth.loginWithRedirect()}>Log In</button>
       <Button
         id='menu-button'
         className='user-navbar'
@@ -49,7 +45,6 @@ const Navbar = ({ Auth }) => {
         ) : (
           'NO LOOGED'
         )}
-        {/* <Avatar alt={Auth.user.name} src={Auth.user.picture} /> */}
       </Button>
       <Menu
         id='navbar-menu'
@@ -95,4 +90,4 @@ const Navbar = ({ Auth }) => {
   );
 };
 
-export default withAuth(Navbar);
+export default Navbar;
