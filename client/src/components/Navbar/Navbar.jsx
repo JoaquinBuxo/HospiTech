@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import { Avatar, Button, Menu, MenuItem, Link } from '@mui/joy';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import './Navbar.css';
+import { withAuth } from '../../Auth/withAuth';
 
-const Navbar = () => {
-  // logout session
-  const { loginWithRedirect, logout } = useAuth0();
-
+const Navbar = ({ Auth }) => {
   // manage menu
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -22,26 +19,37 @@ const Navbar = () => {
   };
 
   const logoutSession = () => {
-    logout({ logoutParams: { returnTo: window.location.origin } });
+    // logout({ logoutParams: { returnTo: window.location.origin } });
+    Auth.logout({ returnTo: `${window.location.origin}/login` });
   };
 
   return (
     <div className='navbar'>
       <div className='logo'>LOGO</div>
-
-      <button onClick={() => loginWithRedirect()}>Log In</button>
+      <button onClick={() => Auth.loginWithRedirect()}>Log In</button>
       <Button
         id='menu-button'
         className='user-navbar'
         aria-controls={open ? 'navbar-menu' : undefined}
         aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
-        variant='outlined'
+        variant='text'
         color='neutral'
         onClick={handleClick}
-        endDecorator={<ArrowDropDown />}
       >
-        John Doe <Avatar>JD</Avatar>
+        {Auth.user ? (
+          <>
+            {Auth.user.name}
+            <Avatar
+              alt={Auth.user.name}
+              src={Auth.user.picture}
+              sx={{ marginLeft: 1 }}
+            />
+          </>
+        ) : (
+          'NO LOOGED'
+        )}
+        {/* <Avatar alt={Auth.user.name} src={Auth.user.picture} /> */}
       </Button>
       <Menu
         id='navbar-menu'
@@ -81,20 +89,10 @@ const Navbar = () => {
             Add new equipment
           </Link>
         </MenuItem>
-        <MenuItem onClick={logoutSession}>
-          {/* <Button
-            component={RouterLink}
-            color='neutral'
-            underline='none'
-            disabled
-            to='/'
-          > */}
-          Logout
-          {/* </Button> */}
-        </MenuItem>
+        <MenuItem onClick={logoutSession}>Logout</MenuItem>
       </Menu>
     </div>
   );
 };
 
-export default Navbar;
+export default withAuth(Navbar);
