@@ -7,7 +7,12 @@ import { Grid } from '@mui/joy';
 
 const ListEquipments = ({ equipments }) => {
   return (
-    <Grid container spacing={2} className='list-equipments' sx={{ margin: 0 }}>
+    <Grid
+      container
+      spacing={2}
+      className='list-equipments'
+      sx={{ margin: 0, marginTop: 5 }}
+    >
       {equipments &&
         equipments.map((equipment) => (
           <Grid key={equipment.id} xs={3}>
