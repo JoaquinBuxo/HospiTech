@@ -22,7 +22,13 @@ const Navbar = ({ Auth }) => {
 
   return (
     <div className='navbar'>
-      <div className='logo'>LOGO</div>
+      <div className='logo'>
+        <img
+          className='logo-img'
+          src='https://res.cloudinary.com/dpxwwazeb/image/upload/v1678122463/logo-hospitech_u8zhxu.png'
+          alt='Logo HospitalTech'
+        />
+      </div>
       <Button
         id='menu-button'
         className='user-navbar'
@@ -53,37 +59,31 @@ const Navbar = ({ Auth }) => {
         onClose={handleClose}
         aria-labelledby='menu-button'
       >
-        <MenuItem onClick={handleClose}>
-          <Link
-            component={RouterLink}
-            color='neutral'
-            underline='none'
-            disabled
-            to='/'
-          >
-            My account
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link
-            component={RouterLink}
-            color='neutral'
-            underline='none'
-            to='/equipments'
-          >
-            All Equipments
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link
-            component={RouterLink}
-            color='neutral'
-            underline='none'
-            to='/create-equipment'
-          >
-            Add new equipment
-          </Link>
-        </MenuItem>
+        <Link
+          component={RouterLink}
+          color='neutral'
+          underline='none'
+          disabled
+          to='/'
+        >
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+        </Link>
+        <Link
+          component={RouterLink}
+          color='neutral'
+          underline='none'
+          to='/equipments'
+        >
+          <MenuItem onClick={handleClose}>All Equipments</MenuItem>
+        </Link>
+        <Link
+          component={RouterLink}
+          color='neutral'
+          underline='none'
+          to='/create-equipment'
+        >
+          <MenuItem onClick={handleClose}>Add new equipment</MenuItem>
+        </Link>
         <MenuItem onClick={logoutSession}>Logout</MenuItem>
       </Menu>
     </div>
