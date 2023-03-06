@@ -23,7 +23,7 @@ const CreateEquipment = ({ Auth }) => {
   const [type, setType] = useState('');
   const [condition, setCondition] = useState('');
   const [description, setDescription] = useState('');
-  const [images, setImages] = useState('');
+  const [images, setImages] = useState([]);
   const [lastRevision, setLastRevision] = useState('');
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [alertError, setAlertError] = useState(false);
@@ -49,16 +49,22 @@ const CreateEquipment = ({ Auth }) => {
   };
 
   const handleImagesChange = async (event) => {
-    const images = event.target.files[0];
-    previewImages(images);
+    const imagesSelected = event.target.files;
+    previewImages(imagesSelected);
   };
 
-  const previewImages = (images) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(images);
-    reader.onloadend = () => {
-      setImages(reader.result);
-    };
+  const previewImages = (imagesSelected) => {
+    const imgAsURL = Array.from(imagesSelected).map((image) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onloadend = () => {
+        if (!Array.from(images).includes(reader.result)) {
+          setImages((prevState) => [...prevState, reader.result]);
+        } else {
+          console.log('This image its already!');
+        }
+      };
+    });
   };
 
   const handleLastRevisionChange = (event) => {
@@ -66,13 +72,14 @@ const CreateEquipment = ({ Auth }) => {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     try {
       const equipmentData = {
         model,
         serialNumber,
         type,
         condition,
-        images: [images],
+        images,
         description,
         ownerId: 'f719c2c1-f59d-4714-80d8-33c4abdcc6eb', // TODO: it will be related with the user hospitalId
         lastRevision: new Date(lastRevision),
@@ -222,13 +229,16 @@ const CreateEquipment = ({ Auth }) => {
                   onChange={handleImagesChange}
                 />
               </Button>
-              {images && (
-                <img
-                  src={images}
-                  alt='Chosen Image'
-                  style={{ height: '100px', objectFit: 'contain' }}
-                />
-              )}
+              {images &&
+                images.length > 0 &&
+                images.map((image) => (
+                  <img
+                    key={image}
+                    src={image}
+                    alt='Chosen Image'
+                    style={{ height: '100px', objectFit: 'contain' }}
+                  />
+                ))}
             </FormControl>
             <FormControl>
               <FormLabel>Description</FormLabel>

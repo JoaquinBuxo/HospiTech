@@ -4,9 +4,8 @@ const prisma = new PrismaClient();
 
 const createEquipment = async (req, res) => {
   try {
-    const images = req.body.images[0];
-    const imagesURL = await uploadImages(images);
-    req.body.images = [imagesURL];
+    const imagesURL = await uploadImages(req.body.images);
+    req.body.images = imagesURL;
     const createEquipment = await prisma.equipment.create({
       data: req.body,
     });
