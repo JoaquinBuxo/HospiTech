@@ -27,9 +27,8 @@ const getAllHospitals = async (req, res) => {
 
 const getHospitalById = async (req, res) => {
   try {
-    const { id } = req.params;
     const hospital = await prisma.hospital.findUnique({
-      where: { id: parseInt(id) },
+      where: { id: req.params.id },
     });
     res.status(200);
     res.send(req.body);

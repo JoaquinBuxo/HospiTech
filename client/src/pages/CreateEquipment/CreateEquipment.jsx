@@ -23,7 +23,7 @@ const CreateEquipment = ({ Auth }) => {
   const [type, setType] = useState('');
   const [condition, setCondition] = useState('');
   const [description, setDescription] = useState('');
-  const [owner, setOwner] = useState('');
+  const [images, setImages] = useState('');
   const [lastRevision, setLastRevision] = useState('');
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [alertError, setAlertError] = useState(false);
@@ -48,8 +48,17 @@ const CreateEquipment = ({ Auth }) => {
     setDescription(event.target.value);
   };
 
-  const handleOwnerChange = (event) => {
-    setOwner(event.target.value);
+  const handleImagesChange = async (event) => {
+    const images = event.target.files[0];
+    previewImages(images);
+  };
+
+  const previewImages = (images) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(images);
+    reader.onloadend = () => {
+      setImages(reader.result);
+    };
   };
 
   const handleLastRevisionChange = (event) => {
@@ -63,8 +72,9 @@ const CreateEquipment = ({ Auth }) => {
         serialNumber,
         type,
         condition,
+        images: [images],
         description,
-        ownerId: 3, // TODO: it will be related with the user hospitalId
+        ownerId: 'f719c2c1-f59d-4714-80d8-33c4abdcc6eb', // TODO: it will be related with the user hospitalId
         lastRevision: new Date(lastRevision),
       };
       ApiService.createEquipment(equipmentData);
@@ -157,7 +167,7 @@ const CreateEquipment = ({ Auth }) => {
           }}
           variant='outlined'
         >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} action='/equipments'>
             <div>
               <Typography level='h4' component='h1'>
                 <b>Add New Equipment</b>
@@ -198,6 +208,27 @@ const CreateEquipment = ({ Auth }) => {
                 onChange={handleConditionChange}
                 placeholder='good'
               />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Images</FormLabel>
+              <Button component='label'>
+                Upload
+                <input
+                  name='images'
+                  hidden
+                  accept='image/*'
+                  multiple
+                  type='file'
+                  onChange={handleImagesChange}
+                />
+              </Button>
+              {images && (
+                <img
+                  src={images}
+                  alt='Chosen Image'
+                  style={{ height: '100px', objectFit: 'contain' }}
+                />
+              )}
             </FormControl>
             <FormControl>
               <FormLabel>Description</FormLabel>
