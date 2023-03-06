@@ -1,3 +1,9 @@
+.equipment-detail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .container-equipment-detail {
   display: flex;
   height: 100%;
@@ -5,13 +11,23 @@
   margin-top: 30px;
 }
 
-.image-equipment {
+.container-image-equipment {
   width: 500px;
-  height: 100%;
   padding: 20px;
+  text-align: center;
+}
+
+.image-equipment {
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .features-equipment {
   width: 500px;
   padding: 20px;
+}
+
+.item-detail {
+  font-size: 20px;
+  margin-bottom: 10px;
 }

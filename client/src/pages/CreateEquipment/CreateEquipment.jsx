@@ -72,7 +72,6 @@ const CreateEquipment = ({ Auth }) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     try {
       const equipmentData = {
         model,
@@ -176,11 +175,11 @@ const CreateEquipment = ({ Auth }) => {
         >
           <form onSubmit={handleSubmit} action='/equipments'>
             <div>
-              <Typography level='h4' component='h1'>
+              <Typography level='h4' component='h1' sx={{ mb: 2 }}>
                 <b>Add New Equipment</b>
               </Typography>
             </div>
-            <FormControl>
+            <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Model</FormLabel>
               <Input
                 name='model'
@@ -189,7 +188,7 @@ const CreateEquipment = ({ Auth }) => {
                 placeholder='Da Vinci Surgical System'
               />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Serial Number</FormLabel>
               <Input
                 name='serialNumber'
@@ -198,7 +197,7 @@ const CreateEquipment = ({ Auth }) => {
                 placeholder='IS23456787654'
               />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Type</FormLabel>
               <Input
                 name='type'
@@ -207,7 +206,7 @@ const CreateEquipment = ({ Auth }) => {
                 placeholder='surgical'
               />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Condition</FormLabel>
               <Input
                 name='condition'
@@ -216,7 +215,7 @@ const CreateEquipment = ({ Auth }) => {
                 placeholder='good'
               />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Images</FormLabel>
               <Button component='label'>
                 Upload
@@ -240,7 +239,7 @@ const CreateEquipment = ({ Auth }) => {
                   />
                 ))}
             </FormControl>
-            <FormControl>
+            <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Description</FormLabel>
               <Input
                 name='description'
@@ -249,7 +248,7 @@ const CreateEquipment = ({ Auth }) => {
                 placeholder="The Da Vinci System consists of a surgeon's console that is typically in the same room as the patient, and a patient-side cart with three to four interactive robotic arms (depending on the model) controlled from the console. The arms hold objects, and can act as scalpels, scissors, bovies, or graspers. The final arm controls the 3D cameras.[6] The surgeon uses the controls of the console to manoeuvre the patient-side cart's robotic arms. The system always requires a human operator."
               />
             </FormControl>
-            <FormControl>
+            <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Last Revision</FormLabel>
               <Input
                 name='lastRevision'

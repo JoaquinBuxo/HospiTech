@@ -1,13 +1,19 @@
 import React from 'react';
 
 import { Card, AspectRatio, CardOverflow, Divider, Typography } from '@mui/joy';
+import './ItemEquipment.css';
 
 const ItemEquipment = ({ equipment }) => {
   return (
     <Card variant='outlined' className='item-equipment'>
       <CardOverflow>
         <AspectRatio ratio='2'>
-          <img src={equipment.images[0]} loading='lazy' alt={equipment.model} />
+          <img
+            className='img-equipment'
+            src={equipment.images[0]}
+            loading='lazy'
+            alt={equipment.model}
+          />
         </AspectRatio>
       </CardOverflow>
       <Typography level='h2' sx={{ fontSize: 'md', mt: 2 }}>

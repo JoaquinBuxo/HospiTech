@@ -3,5 +3,6 @@
   height: 100%;
   border: 2px solid green;
   box-sizing: border-box;
-  padding: 50px;
+  padding: 40px;
+  overflow: scroll;
 }

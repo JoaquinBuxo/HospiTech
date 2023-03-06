@@ -3,6 +3,7 @@ import { withAuth } from '../../Auth/withAuth';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import './EquipmentDetail.css';
+import moment from 'moment';
 
 // api
 import * as ApiService from '../../utils/api';
@@ -24,33 +25,41 @@ const EquipmentDetail = ({ Auth }) => {
     <div className='equipment-detail'>
       <Navbar Auth={Auth}></Navbar>
       <div className='container-equipment-detail'>
-        <div className='image-equipment'>
-          <img src={equipment.model} alt={equipment.model} />
+        <div className='container-image-equipment'>
+          <img
+            className='image-equipment'
+            src={equipment.images ? equipment.images[0] : 'No Img'}
+            alt={equipment.model}
+          />
         </div>
-        <div className='features-equipment'>
-          <div className='model-equipment'>
-            <h2>{equipment.model}</h2>
+        <div className='features-equipment equipment'>
+          <h1 className='model-equipment'>{equipment.model}</h1>
+          <div className='type-equipment item-detail'>
+            <strong>Type: </strong> {equipment.type}
           </div>
-          <div className='type-equipment'>
-            <b>Type: </b>
-            {equipment.type}
+          <div className='condition-equipment item-detail'>
+            <strong>Condition: </strong> {equipment.condition}
           </div>
-          <div className='condition-equipment'>
-            <b>Condition: </b>
-            {equipment.condition}
+          <div className='description-equipment item-detail'>
+            <strong>Description: </strong> {equipment.description}
           </div>
-          <div className='description-equipment'>
-            <b>Description: </b>
-            {equipment.description}
+          <div className='serial-number-equipment item-detail'>
+            <strong>Serial Number: </strong> {equipment.serialNumber}
           </div>
-          <div className='serial-number-equipment'>
-            <b>Serial Number: </b>
-            {equipment.serialNumber}
+          <div className='last-revision-equipment item-detail'>
+            <strong>Last Revision: </strong>
+            {moment(equipment.lastRevision).format('LL')}
           </div>
-          <div className='last-revision-equipment'>
-            <b>Last Revision: </b>
-            {equipment.lastRevision}
-          </div>
+          {equipment.repairs && equipment.repairs.length > 0 && (
+            <div className='repairs-equipment item-detail'>
+              <strong>Reparations: </strong>
+              <ul>
+                {equipment.repairs.map((repair, index) => (
+                  <li key={index}>{repair}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
