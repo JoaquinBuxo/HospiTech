@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import { Card, AspectRatio, CardOverflow, Divider, Typography } from '@mui/joy';
 import './ItemEquipment.css';
@@ -44,7 +45,7 @@ const ItemEquipment = ({ equipment }) => {
           level='body3'
           sx={{ fontWeight: 'md', color: 'text.secondary' }}
         >
-          {equipment.lastRevision}
+          {moment(equipment.lastRevision).format('LL')}
         </Typography>
       </CardOverflow>
     </Card>

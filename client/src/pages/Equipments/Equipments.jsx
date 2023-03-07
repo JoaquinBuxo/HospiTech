@@ -18,6 +18,7 @@ const Equipments = ({ Auth }) => {
   const [filterEquipments, setFilterEquipments] = useState([]);
   const [filterHospitals, setFilterHospitals] = useState([]);
   const [allEquipments, setAllEquipments] = useState([]);
+  const [checkUser, setCheckUser] = useState(true);
 
   const getAllEquipments = async () => {
     const equipments = await ApiService.getAllEquipments();
@@ -77,13 +78,20 @@ const Equipments = ({ Auth }) => {
     }
   };
 
+  const checkUserRegister = async () => {
+    const users = await ApiService.getAllUsers();
+    const registered = users.some((el) => el.email === Auth.user.email);
+    setCheckUser(registered);
+  };
+
   useEffect(() => {
     checkFilterValues();
+    checkUserRegister();
   }, [filterEquipments, filterHospitals]);
 
   return (
     <div className='equipments'>
-      <UserRegister Auth={Auth} />
+      {!checkUser && <UserRegister Auth={Auth} />}
       <Navbar Auth={Auth} />
       <div className='container-equipments'>
         <FilterBar

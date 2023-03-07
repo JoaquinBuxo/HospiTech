@@ -80,7 +80,7 @@ const CreateEquipment = ({ Auth }) => {
         condition,
         images,
         description,
-        ownerId: 'f719c2c1-f59d-4714-80d8-33c4abdcc6eb', // TODO: it will be related with the user hospitalId
+        ownerId: 'c854aaa5-6b34-42f7-874d-f3c00943513a', // TODO: it will be related with the user hospitalId
         lastRevision: new Date(lastRevision),
       };
       ApiService.createEquipment(equipmentData);

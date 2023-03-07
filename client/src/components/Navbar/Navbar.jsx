@@ -23,12 +23,20 @@ const Navbar = ({ Auth }) => {
   return (
     <div className='navbar'>
       <div className='logo'>
-        <img
-          className='logo-img'
-          src='https://res.cloudinary.com/dpxwwazeb/image/upload/v1678122463/logo-hospitech_u8zhxu.png'
-          alt='Logo HospitalTech'
-        />
+        <Link
+          component={RouterLink}
+          underline='none'
+          to='/equipments'
+          sx={{ height: '100%' }}
+        >
+          <img
+            className='logo-img'
+            src='https://res.cloudinary.com/dpxwwazeb/image/upload/v1678122463/logo-hospitech_u8zhxu.png'
+            alt='Logo HospitalTech'
+          />
+        </Link>
       </div>
+
       <Button
         id='menu-button'
         className='user-navbar'
@@ -59,6 +67,7 @@ const Navbar = ({ Auth }) => {
         onClose={handleClose}
         aria-labelledby='menu-button'
       >
+        {/* TODO: Create user details page
         <Link
           component={RouterLink}
           color='neutral'
@@ -67,7 +76,7 @@ const Navbar = ({ Auth }) => {
           to='/'
         >
           <MenuItem onClick={handleClose}>My account</MenuItem>
-        </Link>
+        </Link> */}
         <Link
           component={RouterLink}
           color='neutral'

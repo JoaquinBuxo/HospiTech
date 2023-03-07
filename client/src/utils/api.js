@@ -27,3 +27,19 @@ export const getAllHospitals = async () => {
   const responseJson = await response.json();
   return responseJson;
 };
+
+export const createUser = async (user) => {
+  const response = await fetch(`${baseURL}/user`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  });
+  const responseJson = await response.json();
+  return responseJson;
+};
+
+export const getAllUsers = async () => {
+  const response = await fetch(`${baseURL}/users`);
+  const responseJson = await response.json();
+  return responseJson;
+};

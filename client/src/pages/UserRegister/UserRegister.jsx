@@ -20,8 +20,8 @@ const UserRegister = ({ Auth }) => {
   const [hospitals, setHospitals] = useState([]);
   const [open, setOpen] = useState(true);
 
-  const handleHospitalChange = (event) => {
-    setHospital(event.target.value);
+  const handleHospitalChange = (newValue) => {
+    setHospital(newValue);
   };
 
   const getHospitalsName = async () => {
@@ -35,7 +35,6 @@ const UserRegister = ({ Auth }) => {
   };
 
   const handleSubmit = () => {
-    console.log('carcola');
     try {
       const userData = {
         name: Auth.user.name,
@@ -71,7 +70,8 @@ const UserRegister = ({ Auth }) => {
                 <Select
                   startDecorator={<LocalHospital />}
                   placeholder='Select a Hospital'
-                  onChange={handleHospitalChange}
+                  value={hospital}
+                  onChange={(e, newValue) => handleHospitalChange(newValue)}
                 >
                   {hospitals &&
                     hospitals.length > 0 &&
@@ -82,7 +82,14 @@ const UserRegister = ({ Auth }) => {
                     ))}
                 </Select>
               </FormControl>
-              <Button onClose={() => setOpen(false)}>Submit</Button>
+              <Button
+                onClick={() => {
+                  handleSubmit();
+                  setOpen(false);
+                }}
+              >
+                Submit
+              </Button>
             </Stack>
           </form>
         </ModalDialog>
