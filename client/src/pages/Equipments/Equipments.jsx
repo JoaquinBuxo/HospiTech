@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withAuth } from '../../Auth/withAuth';
+import withAuth from '../../Auth/withAuth';
 
 // components
 import Navbar from '../../components/Navbar/Navbar';

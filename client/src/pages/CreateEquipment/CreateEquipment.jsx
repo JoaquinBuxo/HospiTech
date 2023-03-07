@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withAuth } from '../../Auth/withAuth';
+import withAuth from '../../Auth/withAuth';
 
 import Navbar from '../../components/Navbar/Navbar';
 import * as ApiService from '../../utils/api';

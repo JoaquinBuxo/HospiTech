@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-export const withAuth = (Component) => {
+const withAuth = (Component) => {
   return (props) => {
     const Auth = useAuth0();
 
@@ -21,3 +21,5 @@ export const withAuth = (Component) => {
     return <Component {...props} Auth={Auth} />;
   };
 };
+
+export default withAuth;

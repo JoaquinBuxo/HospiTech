@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withAuth } from '../../Auth/withAuth';
+import withAuth from '../../Auth/withAuth';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import './EquipmentDetail.css';
