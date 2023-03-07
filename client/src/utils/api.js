@@ -1,23 +1,29 @@
-const baseUrl = import.meta.env.VITE_API_SERVER_URL;
+const baseURL = import.meta.env.VITE_API_SERVER_URL;
 
 export const getEquipmentById = async (id) => {
-  const getData = await fetch(`${baseUrl}/equipment/${id}`);
+  const getData = await fetch(`${baseURL}/equipment/${id}`);
   const response = await getData.json();
   return response;
 };
 
 export const getAllEquipments = async () => {
-  const getData = await fetch(`${baseUrl}/equipments`);
+  const getData = await fetch(`${baseURL}/equipments`);
   const response = await getData.json();
   return response;
 };
 
 export const createEquipment = async (equipment) => {
-  const response = await fetch(`${baseUrl}/equipment`, {
+  const response = await fetch(`${baseURL}/equipment`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(equipment),
   });
+  const responseJson = await response.json();
+  return responseJson;
+};
+
+export const getAllHospitals = async () => {
+  const response = await fetch(`${baseURL}/hospitals`);
   const responseJson = await response.json();
   return responseJson;
 };

@@ -1,14 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FormControl, Grid, Autocomplete, FormLabel } from '@mui/joy';
 import { Search, LocalHospital, FilterList } from '@mui/icons-material';
-
 import './FilterBar.css';
 
-const FilterBar = () => {
-  const hospitals = ['test'];
-  const equipments = ['test'];
-  const order = ['First Added', 'Last Added'];
+import * as ApiService from '../../utils/api';
+
+const FilterBar = (props) => {
+  const [equipments, setEquipments] = useState([]);
+  const [hospitals, setHospitals] = useState([]);
+  const [order, setOrder] = useState([]);
+
+  const getHospitalsName = async () => {
+    const hospitals = await ApiService.getAllHospitals();
+    const names = hospitals.map((hospital) => ({
+      label: hospital.name,
+      select: 'hospital',
+      id: hospital.id,
+    }));
+    setHospitals(names);
+  };
+
+  const getEquipmentsName = async () => {
+    const equipments = await ApiService.getAllEquipments();
+    const names = equipments.map((equipment) => equipment.model);
+    const filterNames = [...new Set(names)].map((name) => ({
+      label: name,
+      select: 'equipment',
+    }));
+    setEquipments(filterNames);
+  };
+
+  useEffect(() => {
+    getHospitalsName();
+    getEquipmentsName();
+    setOrder([
+      { label: 'First Added', select: 'order' },
+      { label: 'Last Added', select: 'order' },
+    ]);
+  }, []);
 
   return (
     <Grid
@@ -27,6 +57,7 @@ const FilterBar = () => {
             startDecorator={<Search />}
             placeholder='Search Equipment'
             options={equipments}
+            onChange={props.handleSearchChange}
           />
         </FormControl>
       </Grid>
@@ -37,6 +68,7 @@ const FilterBar = () => {
             startDecorator={<FilterList />}
             placeholder='Order by...'
             options={order}
+            onChange={props.handleOrderChange}
           />
         </FormControl>
       </Grid>
@@ -47,6 +79,7 @@ const FilterBar = () => {
             startDecorator={<LocalHospital />}
             placeholder='Hospital'
             options={hospitals}
+            onChange={props.handleHospitalChange}
           />
         </FormControl>
       </Grid>

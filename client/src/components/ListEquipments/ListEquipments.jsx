@@ -11,7 +11,7 @@ const ListEquipments = ({ equipments }) => {
       container
       spacing={2}
       className='list-equipments'
-      sx={{ margin: 0, marginTop: 5 }}
+      sx={{ margin: 0, marginTop: 2.5 }}
     >
       {equipments &&
         equipments.map((equipment) => (
