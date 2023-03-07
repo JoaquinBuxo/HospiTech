@@ -5,6 +5,7 @@ import withAuth from '../../Auth/withAuth';
 import Navbar from '../../components/Navbar/Navbar';
 import ListEquipments from '../../components/ListEquipments/ListEquipments';
 import FilterBar from '../../components/FilterBar/FilterBar';
+import UserRegister from '../UserRegister/UserRegister';
 
 // styles
 import './Equipments.css';
@@ -82,7 +83,8 @@ const Equipments = ({ Auth }) => {
 
   return (
     <div className='equipments'>
-      <Navbar Auth={Auth}></Navbar>
+      <UserRegister Auth={Auth} />
+      <Navbar Auth={Auth} />
       <div className='container-equipments'>
         <FilterBar
           handleSearchChange={handleSearchChange}
