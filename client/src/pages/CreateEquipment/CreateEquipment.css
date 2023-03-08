@@ -1,0 +1,16 @@
+.images-container {
+  display: flex;
+}
+
+.img-upload {
+  padding: 10px;
+  border: 2px solid #8e95a7;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.button {
+  background-color: #334b88 !important;
+  color: white;
+}

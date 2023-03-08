@@ -17,6 +17,8 @@ import {
   IconButton,
 } from '@mui/joy';
 
+import './CreateEquipment.css';
+
 const CreateEquipment = ({ Auth }) => {
   const [model, setModel] = useState('');
   const [serialNumber, setSerialNumber] = useState('');
@@ -27,6 +29,7 @@ const CreateEquipment = ({ Auth }) => {
   const [lastRevision, setLastRevision] = useState('');
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [alertError, setAlertError] = useState(false);
+  const [user, setUser] = useState({});
 
   const handleModelChange = (event) => {
     setModel(event.target.value);
@@ -53,6 +56,12 @@ const CreateEquipment = ({ Auth }) => {
     previewImages(imagesSelected);
   };
 
+  const getUser = async () => {
+    const users = await ApiService.getAllUsers();
+    const user = users.find((el) => el.email === Auth.user.email);
+    setUser(user);
+  };
+
   const previewImages = (imagesSelected) => {
     const imgAsURL = Array.from(imagesSelected).map((image) => {
       const reader = new FileReader();
@@ -72,6 +81,8 @@ const CreateEquipment = ({ Auth }) => {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
+    getUser();
     try {
       const equipmentData = {
         model,
@@ -80,7 +91,9 @@ const CreateEquipment = ({ Auth }) => {
         condition,
         images,
         description,
-        ownerId: 'c854aaa5-6b34-42f7-874d-f3c00943513a', // TODO: it will be related with the user hospitalId
+        ownerId: user.hospitalId,
+        userId: user.id,
+        repairs: ['Replaced circuit'],
         lastRevision: new Date(lastRevision),
       };
       ApiService.createEquipment(equipmentData);
@@ -186,6 +199,7 @@ const CreateEquipment = ({ Auth }) => {
                 value={model}
                 onChange={handleModelChange}
                 placeholder='Da Vinci Surgical System'
+                required
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -195,6 +209,7 @@ const CreateEquipment = ({ Auth }) => {
                 value={serialNumber}
                 onChange={handleSerialNumberChange}
                 placeholder='IS23456787654'
+                required
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -204,6 +219,7 @@ const CreateEquipment = ({ Auth }) => {
                 value={type}
                 onChange={handleTypeChange}
                 placeholder='surgical'
+                required
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -213,12 +229,13 @@ const CreateEquipment = ({ Auth }) => {
                 value={condition}
                 onChange={handleConditionChange}
                 placeholder='good'
+                required
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Images</FormLabel>
-              <Button component='label'>
-                Upload
+              <Button className='button' component='label'>
+                UPLOAD
                 <input
                   name='images'
                   hidden
@@ -228,16 +245,19 @@ const CreateEquipment = ({ Auth }) => {
                   onChange={handleImagesChange}
                 />
               </Button>
-              {images &&
-                images.length > 0 &&
-                images.map((image) => (
-                  <img
-                    key={image}
-                    src={image}
-                    alt='Chosen Image'
-                    style={{ height: '100px', objectFit: 'contain' }}
-                  />
-                ))}
+              <div className='images-container'>
+                {images &&
+                  images.length > 0 &&
+                  images.map((image) => (
+                    <img
+                      className='img-upload'
+                      key={image}
+                      src={image}
+                      alt='Chosen Image'
+                      style={{ height: '70px', objectFit: 'contain' }}
+                    />
+                  ))}
+              </div>
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Description</FormLabel>
@@ -246,6 +266,7 @@ const CreateEquipment = ({ Auth }) => {
                 value={description}
                 onChange={handleDescriptionChange}
                 placeholder="The Da Vinci System consists of a surgeon's console that is typically in the same room as the patient, and a patient-side cart with three to four interactive robotic arms (depending on the model) controlled from the console. The arms hold objects, and can act as scalpels, scissors, bovies, or graspers. The final arm controls the 3D cameras.[6] The surgeon uses the controls of the console to manoeuvre the patient-side cart's robotic arms. The system always requires a human operator."
+                required
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -256,10 +277,15 @@ const CreateEquipment = ({ Auth }) => {
                 onChange={handleLastRevisionChange}
                 type='date'
                 placeholder='MM/DD/YYYY'
+                required
               />
             </FormControl>
 
-            <Button type='submit' sx={{ mt: 1, width: '100%' }}>
+            <Button
+              className='button'
+              type='submit'
+              sx={{ mt: 1, width: '100%' }}
+            >
               ADD EQUIPMENT
             </Button>
           </form>
