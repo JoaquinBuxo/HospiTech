@@ -29,7 +29,6 @@ const CreateEquipment = ({ Auth }) => {
   const [lastRevision, setLastRevision] = useState('');
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [alertError, setAlertError] = useState(false);
-  const [user, setUser] = useState({});
 
   const handleModelChange = (event) => {
     setModel(event.target.value);
@@ -59,7 +58,7 @@ const CreateEquipment = ({ Auth }) => {
   const getUser = async () => {
     const users = await ApiService.getAllUsers();
     const user = users.find((el) => el.email === Auth.user.email);
-    setUser(user);
+    return user;
   };
 
   const previewImages = (imagesSelected) => {
@@ -80,9 +79,8 @@ const CreateEquipment = ({ Auth }) => {
     setLastRevision(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    getUser();
+  const handleSubmit = async (event) => {
+    const user = await getUser();
     try {
       const equipmentData = {
         model,
@@ -93,7 +91,6 @@ const CreateEquipment = ({ Auth }) => {
         description,
         ownerId: user.hospitalId,
         userId: user.id,
-        repairs: ['Replaced circuit'],
         lastRevision: new Date(lastRevision),
       };
       ApiService.createEquipment(equipmentData);
