@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import withAuth from '../../Auth/withAuth';
 
 import Navbar from '../../components/Navbar/Navbar';
@@ -29,6 +29,7 @@ const CreateEquipment = ({ Auth }) => {
   const [lastRevision, setLastRevision] = useState('');
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [alertError, setAlertError] = useState(false);
+  const [user, setUser] = useState({});
 
   const handleModelChange = (event) => {
     setModel(event.target.value);
@@ -58,7 +59,7 @@ const CreateEquipment = ({ Auth }) => {
   const getUser = async () => {
     const users = await ApiService.getAllUsers();
     const user = users.find((el) => el.email === Auth.user.email);
-    return user;
+    setUser(user);
   };
 
   const previewImages = (imagesSelected) => {
@@ -79,8 +80,13 @@ const CreateEquipment = ({ Auth }) => {
     setLastRevision(event.target.value);
   };
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const handleSubmit = async (event) => {
-    const user = await getUser();
+    // const user = await getUser();
+    console.log(user);
     try {
       const equipmentData = {
         model,
