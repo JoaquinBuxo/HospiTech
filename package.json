@@ -1,0 +1,29 @@
+{
+  "name": "hospitech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "commit": "cz",
+    "server-install": "cd server && npm i",
+    "client-install": "cd client && npm i",
+    "install-all-deps": "concurrently \"npm i\" \"npm run server-install\" \"npm run client-install\"",
+    "server-dev": "cd server && nodemon",
+    "client-dev": "cd client && npm run dev",
+    "db-ui": "cd server && npx prisma studio",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "concurrently": "^7.6.0",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
