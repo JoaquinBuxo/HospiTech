@@ -1,4 +1,4 @@
-const baseURL = import.meta.env.VITE_API_SERVER_URL;
+const baseURL = 'http://localhost:4000';
 
 export const getEquipmentById = async (id) => {
   const getData = await fetch(`${baseURL}/equipment/${id}`);
