@@ -1,4 +1,6 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary } from "cloudinary";
+import * as dotenv from "dotenv"; 
+dotenv.config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -11,7 +13,7 @@ const uploadImages = async (images) => {
     const imagesURL = [];
     for (let i = 0; i < images.length; i++) {
       const uploadedResponse = await cloudinary.uploader.upload(images[i], {
-        upload_preset: 'hospitech',
+        upload_preset: "hospitech",
       });
       imagesURL.push(uploadedResponse.secure_url);
     }

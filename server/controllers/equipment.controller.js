@@ -6,9 +6,11 @@ const createEquipment = async (req, res) => {
   try {
     const imagesURL = await uploadImages(req.body.images);
     req.body.images = imagesURL;
+    console.log("creating");
     const createEquipment = await prisma.equipment.create({
       data: req.body,
     });
+    console.log(createEquipment);
     res.status(200);
     res.send(createEquipment);
   } catch (error) {
