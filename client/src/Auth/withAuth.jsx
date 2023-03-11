@@ -7,18 +7,21 @@ const withAuth = (Component) => {
   return (props) => {
     const Auth = useAuth0();
 
+    // Loading...
     if (Auth.isLoading) {
+      console.log(Auth.isLoading);
       return (
-        <div className='login-loading'>
+        <div className="login-loading">
           <CircularProgress />
         </div>
       );
     }
 
+    // Not Authenticated
     if (!Auth.isAuthenticated) {
       return (
-        <div className='logout-container'>
-          <div className='logout'>
+        <div className="logout-container">
+          <div className="logout">
             You are not logged!
             <button onClick={() => Auth.loginWithRedirect()}>Log In</button>
           </div>
@@ -26,7 +29,13 @@ const withAuth = (Component) => {
       );
     }
 
-    return <Component {...props} Auth={Auth} />;
+    // Authenticated
+    return (
+      <Component
+        {...props}
+        Auth={Auth}
+      />
+    );
   };
 };
 
