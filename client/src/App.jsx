@@ -14,21 +14,30 @@ import CreateEquipment from './pages/CreateEquipment/CreateEquipment';
 function App() {
   return (
     <Auth0Provider
-      domain='dev-xbvvtrjka5pzpdpv.us.auth0.com'
-      clientId='1yjJDCr99TgiXTMo0EI1QEitPnzGkUtE'
+      domain={import.meta.env.VITE_AUTHO_DOMAIN}
+      clientId={import.meta.env.VITE_AUTHO_CLIENT_ID}
       authorizationParams={{
         redirect_uri: window.location.origin,
       }}
     >
-      <div className='App'>
+      <div className="App">
         <CssVarsProvider>
           <Router>
             <Routes>
-              <Route path='/' element={<Equipments />} />
-              <Route path='/equipments' element={<Equipments />} />
-              <Route path='/create-equipment' element={<CreateEquipment />} />
               <Route
-                path='/equipment-detail/:id'
+                path="/"
+                element={<Equipments />}
+              />
+              <Route
+                path="/equipments"
+                element={<Equipments />}
+              />
+              <Route
+                path="/create-equipment"
+                element={<CreateEquipment />}
+              />
+              <Route
+                path="/equipment-detail/:id"
                 element={<EquipmentDetail />}
               />
             </Routes>
