@@ -1,20 +1,16 @@
-import React, { useEffect } from 'react';
-import Authentication from '../../wrappers/Authentication';
+import React from 'react';
+import withAuth from '../../Auth/withAuth';
 
 import Navbar from '../../components/Navbar/Navbar';
 import EquipmentDetailInner from './EquipmentDetailInner';
 
 const EquipmentDetail = ({ Auth }) => {
-  useEffect(() => console.log(Auth), []);
-
   return (
-    <Authentication>
-      <div className="equipment-detail">
-        <Navbar Auth={Auth}></Navbar>
-        <EquipmentDetailInner />
-      </div>
-    </Authentication>
+    <>
+      <Navbar Auth={Auth}></Navbar>
+      <EquipmentDetailInner />
+    </>
   );
 };
 
-export default EquipmentDetail;
+export default withAuth(EquipmentDetail);
