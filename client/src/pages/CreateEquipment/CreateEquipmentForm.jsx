@@ -80,8 +80,6 @@ const CreateEquipmentForm = function ({ email }) {
   const handleSubmit = async (event) => {
     // const user = await getUser();
     console.log(user);
-    setEnteredName(event.target.value);
-    event.target.setCustomValidity("");
     try {
       const equipmentData = {
         model,
@@ -133,11 +131,6 @@ const CreateEquipmentForm = function ({ email }) {
                 onChange={handleModelChange}
                 placeholder="Da Vinci Surgical System"
                 required
-                onInvalid={(e) => {
-                  e.target.setCustomValidity(
-                    "error msg:  Please enter the model details"
-                  );
-                }}
                 autoComplete="off"
               />
             </FormControl>
@@ -179,6 +172,7 @@ const CreateEquipmentForm = function ({ email }) {
               <Button className="button" component="label">
                 UPLOAD
                 <input
+                  data-testid="upload"
                   name="images"
                   hidden
                   accept="image/*"
@@ -221,8 +215,12 @@ const CreateEquipmentForm = function ({ email }) {
                 onChange={handleLastRevisionChange}
                 type="date"
                 placeholder="DD/MM/YYYY"
-                disableFuture
                 autoComplete="off"
+                slotProps={{
+                  input: {
+                    max: { presentDay },
+                  },
+                }}
               />
             </FormControl>
 

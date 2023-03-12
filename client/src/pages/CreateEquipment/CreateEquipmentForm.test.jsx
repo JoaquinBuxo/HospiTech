@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import {
-  screen,
-  render,
-  fireEvent,
-} from "@testing-library/react";
-import {describe, expect, test} from "vitest";
+import { screen, render, fireEvent } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
 import CreateEquipmentForm from "./CreateEquipmentForm";
+import userEvent from "@testing-library/user-event";
+
 const formsetup = function () {
   const form = render(<CreateEquipmentForm />);
   const model = screen.getByRole("textbox", { name: "Model" });
@@ -37,6 +35,16 @@ describe("create equipment form test", () => {
     const { model } = formsetup();
     fireEvent.change(model, { target: { value: "test" } });
     expect(model.value).toBe("test");
+  });
+  test("Input to serialNumber field is correctly rendering", () => {
+    const { serialNumber } = formsetup();
+    fireEvent.change(serialNumber, { target: { value: "123" } });
+    expect(serialNumber.value).toBe("123");
+  });
+  test("Input type field is correctly rendering", () => {
+    const { type } = formsetup();
+    fireEvent.change(type, { target: { value: "testtype" } });
+    expect(type.value).toBe("testtype");
   });
 
   test("Should not be able to submit empty form", () => {
