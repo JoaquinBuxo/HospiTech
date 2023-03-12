@@ -24,18 +24,9 @@ function App() {
         <CssVarsProvider>
           <Router>
             <Routes>
-              <Route
-                path="/"
-                element={<Equipments />}
-              />
-              <Route
-                path="/equipments"
-                element={<Equipments />}
-              />
-              <Route
-                path="/create-equipment"
-                element={<CreateEquipment />}
-              />
+              <Route path="/" element={<Equipments />} />
+              <Route path="/equipments" element={<Equipments />} />
+              <Route path="/create-equipment" element={<CreateEquipment />} />
               <Route
                 path="/equipment-detail/:id"
                 element={<EquipmentDetail />}
