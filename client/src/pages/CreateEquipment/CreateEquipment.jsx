@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import withAuth from "../../Auth/withAuth";
 import Navbar from "../../components/Navbar/Navbar";
+import CreateEquipmentForm from "./CreateEquipmentForm";
 import { CheckCircle, CloseRounded, Report } from "@mui/icons-material";
 
 import {
@@ -17,8 +18,9 @@ import {
 import "./CreateEquipment.css";
 
 const CreateEquipment = ({ Auth }) => {
-  console.log(Auth);
+  const email = Auth.user.email;
   const [alertSuccess, setAlertSuccess] = useState(false);
+  const [alertError, setAlertError] = useState(false);
   return (
     <div className="create-equipment">
       <Navbar Auth={Auth}></Navbar>
@@ -85,8 +87,7 @@ const CreateEquipment = ({ Auth }) => {
           </div>
         </Alert>
       )}
-
-      <CreateEquipment />
+      <CreateEquipmentForm email={email} />
     </div>
   );
 };

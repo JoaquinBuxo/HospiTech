@@ -11,15 +11,7 @@ import {
   Typography,
 } from "@mui/joy";
 
-import {
-  Sheet,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  Typography,
-} from "@mui/joy";
-const CreateEquipmentForm = function () {
+const CreateEquipmentForm = function ({ email }) {
   const [model, setModel] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
   const [type, setType] = useState("");
@@ -29,6 +21,8 @@ const CreateEquipmentForm = function () {
   const [lastRevision, setLastRevision] = useState("");
   const [alertError, setAlertError] = useState(false);
   const [user, setUser] = useState({});
+  const presentDay = new Date(Date.now()).toLocaleString().split(",")[0];
+  console.log(presentDay);
 
   const handleModelChange = (event) => {
     setModel(event.target.value);
@@ -57,7 +51,7 @@ const CreateEquipmentForm = function () {
 
   const getUser = async () => {
     const users = await ApiService.getAllUsers();
-    const user = users.find((el) => el.email === Auth.user.email);
+    const user = users.find((el) => el.email === email);
     setUser(user);
   };
 
@@ -86,6 +80,8 @@ const CreateEquipmentForm = function () {
   const handleSubmit = async (event) => {
     // const user = await getUser();
     console.log(user);
+    setEnteredName(event.target.value);
+    event.target.setCustomValidity("");
     try {
       const equipmentData = {
         model,
@@ -125,13 +121,8 @@ const CreateEquipmentForm = function () {
         >
           <form onSubmit={handleSubmit} action="/equipments">
             <div>
-              <Typography
-                data-testid="addEquipment"
-                level="h4"
-                component="h1"
-                sx={{ mb: 2 }}
-              >
-                <b>Add New Equipment</b>
+              <Typography level="h4" component="h1" sx={{ mb: 2 }}>
+                <span data-testid="title">Add New Equipment</span>
               </Typography>
             </div>
             <FormControl sx={{ mb: 1.5 }}>
@@ -142,6 +133,12 @@ const CreateEquipmentForm = function () {
                 onChange={handleModelChange}
                 placeholder="Da Vinci Surgical System"
                 required
+                onInvalid={(e) => {
+                  e.target.setCustomValidity(
+                    "error msg:  Please enter the model details"
+                  );
+                }}
+                autoComplete="off"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -152,6 +149,7 @@ const CreateEquipmentForm = function () {
                 onChange={handleSerialNumberChange}
                 placeholder="IS23456787654"
                 required
+                autoComplete="off"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -162,6 +160,7 @@ const CreateEquipmentForm = function () {
                 onChange={handleTypeChange}
                 placeholder="surgical"
                 required
+                autoComplete="off"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -172,6 +171,7 @@ const CreateEquipmentForm = function () {
                 onChange={handleConditionChange}
                 placeholder="good"
                 required
+                autoComplete="off"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -185,6 +185,7 @@ const CreateEquipmentForm = function () {
                   multiple
                   type="file"
                   onChange={handleImagesChange}
+                  autoComplete="off"
                 />
               </Button>
               <div className="images-container">
@@ -209,6 +210,7 @@ const CreateEquipmentForm = function () {
                 onChange={handleDescriptionChange}
                 placeholder="The Da Vinci System consists of a surgeon's console that is typically in the same room as the patient, and a patient-side cart with three to four interactive robotic arms (depending on the model) controlled from the console. The arms hold objects, and can act as scalpels, scissors, bovies, or graspers. The final arm controls the 3D cameras.[6] The surgeon uses the controls of the console to manoeuvre the patient-side cart's robotic arms. The system always requires a human operator."
                 required
+                autoComplete="off"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -218,8 +220,9 @@ const CreateEquipmentForm = function () {
                 value={lastRevision}
                 onChange={handleLastRevisionChange}
                 type="date"
-                placeholder="MM/DD/YYYY"
-                required
+                placeholder="DD/MM/YYYY"
+                disableFuture
+                autoComplete="off"
               />
             </FormControl>
 
@@ -227,6 +230,7 @@ const CreateEquipmentForm = function () {
               className="button"
               type="submit"
               sx={{ mt: 1, width: "100%" }}
+              data-testid="addEquipment"
             >
               ADD EQUIPMENT
             </Button>
