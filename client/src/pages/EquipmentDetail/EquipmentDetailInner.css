@@ -28,6 +28,11 @@
 }
 
 .item-detail {
+  display: flex;
   font-size: 20px;
   margin-bottom: 10px;
+}
+.item-detail__label {
+  font-weight: bold;
+  margin-right: 5px;
 }

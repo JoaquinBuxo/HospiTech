@@ -1,5 +1,4 @@
 import { vi, describe, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 import * as auth0 from '@auth0/auth0-react';

@@ -21,30 +21,30 @@ const Navbar = ({ Auth }) => {
   };
 
   return (
-    <div className='navbar'>
-      <div className='logo'>
+    <div className="navbar">
+      <div className="logo">
         <Link
           component={RouterLink}
-          underline='none'
-          to='/equipments'
+          underline="none"
+          to="/equipments"
           sx={{ height: '100%' }}
         >
           <img
-            className='logo-img'
-            src='https://res.cloudinary.com/dpxwwazeb/image/upload/v1678122463/logo-hospitech_u8zhxu.png'
-            alt='Logo HospitalTech'
+            className="logo-img"
+            src="https://res.cloudinary.com/dpxwwazeb/image/upload/v1678122463/logo-hospitech_u8zhxu.png"
+            alt="Logo HospitalTech"
           />
         </Link>
       </div>
 
       <Button
-        id='menu-button'
-        className='user-navbar'
+        id="menu-button"
+        className="user-navbar"
         aria-controls={open ? 'navbar-menu' : undefined}
-        aria-haspopup='true'
+        aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        variant='text'
-        color='neutral'
+        variant="text"
+        color="neutral"
         onClick={handleClick}
       >
         {Auth.user ? (
@@ -61,11 +61,11 @@ const Navbar = ({ Auth }) => {
         )}
       </Button>
       <Menu
-        id='navbar-menu'
+        id="navbar-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        aria-labelledby='menu-button'
+        aria-labelledby="menu-button"
       >
         {/* TODO: Create user details page
         <Link
@@ -79,17 +79,17 @@ const Navbar = ({ Auth }) => {
         </Link> */}
         <Link
           component={RouterLink}
-          color='neutral'
-          underline='none'
-          to='/equipments'
+          color="neutral"
+          underline="none"
+          to="/equipments"
         >
           <MenuItem onClick={handleClose}>All Equipments</MenuItem>
         </Link>
         <Link
           component={RouterLink}
-          color='neutral'
-          underline='none'
-          to='/create-equipment'
+          color="neutral"
+          underline="none"
+          to="/create-equipment"
         >
           <MenuItem onClick={handleClose}>Add new equipment</MenuItem>
         </Link>

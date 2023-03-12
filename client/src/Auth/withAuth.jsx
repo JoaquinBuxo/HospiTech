@@ -9,7 +9,6 @@ const withAuth = (Component) => {
 
     // Loading...
     if (Auth.isLoading) {
-      console.log(Auth.isLoading);
       return (
         <div className="login-loading">
           <CircularProgress />
