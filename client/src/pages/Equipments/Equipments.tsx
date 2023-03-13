@@ -1,6 +1,6 @@
 import withAuth from "../../Auth/withAuth";
 import EquipmentHomePage from "./EquipmentHomePage";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,FC } from "react";
 // components
 import Navbar from "../../components/Navbar/Navbar";
 import UserRegister from "../UserRegister/UserRegister";
@@ -10,7 +10,7 @@ import "./Equipments.css";
 // api
 import * as ApiService from "../../utils/api";
 
-const Equipments = ({ Auth }) => {
+const Equipments:FC = ({ Auth }) => {
   const [checkUser, setCheckUser] = useState(true);
   const checkUserRegister = async () => {
     const users = await ApiService.getAllUsers();
