@@ -15,11 +15,13 @@ const ListEquipments = ({ equipments }) => {
     >
       {equipments &&
         equipments.map((equipment) => (
-          <Grid key={equipment.id} xs={3}>
+
+          <Grid className="displayEquipment" key={equipment.id} xs={3}>
             <Link to={`/equipment-detail/${equipment.id}`}>
               <ItemEquipment equipment={equipment}></ItemEquipment>
             </Link>
           </Grid>
+
         ))}
     </Grid>
   );

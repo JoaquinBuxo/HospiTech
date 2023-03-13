@@ -13,6 +13,7 @@ const EquipmentHomePage = function () {
 
   const getAllEquipments = async () => {
     const equipments = await ApiService.getAllEquipments();
+    console.log(equipments);
     setEquipments([...equipments]);
     setAllEquipments([...equipments]);
     return equipments;
@@ -72,6 +73,9 @@ const EquipmentHomePage = function () {
   useEffect(() => {
     checkFilterValues();
   }, [filterEquipments, filterHospitals]);
+  useEffect(() => {
+    getAllEquipments();
+  }, []);
   return (
     <>
       <FilterBar
