@@ -12,7 +12,6 @@ const EquipmentDetailInner = () => {
 
   const getEquipment = async () => {
     const equipment = await ApiService.getEquipmentById(id);
-    console.log(equipment);
     setEquipment(equipment);
   };
 

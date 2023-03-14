@@ -1,12 +1,22 @@
 import React,{FC} from 'react';
-import { useAuth0, Auth0ContextInterface, User } from '@auth0/auth0-react';
+import { useAuth0} from '@auth0/auth0-react';
 import { CircularProgress } from '@mui/joy';
 import '../App.css';
+import { AuthProp} from '../Typescript-Interfaces/Types'
+type Props = {
+  Auth: AuthProp;
+};
 
-
-const withAuth = (Component:React.FC) => {
-  return (props:any) => {
-    const Auth:Auth0ContextInterface<User> = useAuth0();
+const withAuth = (Component: ({ Auth }: Props) => JSX.Element) => {
+  return (prop: any) => {
+    const AuthResponse = useAuth0();
+    const Auth = {
+      isAuthenticated: AuthResponse.isAuthenticated,
+      user: AuthResponse.user,
+      loginWithRedirect: AuthResponse.loginWithRedirect,
+      isLoading: AuthResponse.isLoading,
+      logout:AuthResponse.logout
+    };
 
     // Loading...
     if (Auth.isLoading) {
@@ -27,15 +37,10 @@ const withAuth = (Component:React.FC) => {
           </div>
         </div>
       );
+    } else {
+      // Authenticated
+      return <Component {...prop} Auth={Auth} />;
     }
-
-    // Authenticated
-    return (
-      <Component
-        {...props}
-        Auth={Auth}
-      />
-    );
   };
 };
 

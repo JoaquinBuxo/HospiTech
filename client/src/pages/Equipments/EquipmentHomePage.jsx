@@ -13,7 +13,6 @@ const EquipmentHomePage = function () {
 
   const getAllEquipments = async () => {
     const equipments = await ApiService.getAllEquipments();
-    console.log(equipments);
     setEquipments([...equipments]);
     setAllEquipments([...equipments]);
     return equipments;

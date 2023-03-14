@@ -1,5 +1,6 @@
 const baseURL = 'http://localhost:4000';
 
+
 export const getEquipmentById = async (id) => {
   const getData = await fetch(`${baseURL}/equipment/${id}`);
   const response = await getData.json();
