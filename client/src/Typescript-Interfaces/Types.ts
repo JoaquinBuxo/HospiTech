@@ -1,4 +1,5 @@
 
+
 export type Equipment = {
   id: String,
   type:String,
@@ -14,7 +15,7 @@ export type Equipment = {
   userId:String,
 }
 export type Equipments = Equipment[];
-export type User = {
+export type UserData = {
   name:String,
   id:String,
   email:String,
@@ -35,7 +36,7 @@ export type Hospital = {
   image?:String,
   description?:String,
   country:String,
-  users?:User[],
+  users?:UserData[],
   equipment:Equipment[],
   transactionsMade?:Transaction[],
   transactionsReceived?:Transaction[],

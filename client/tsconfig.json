@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "target": "es2016",
-    "allowJs": false,
+    "allowJs": true,
     "noImplicitAny": true,
     "moduleResolution": "node", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "module": "ESNext",

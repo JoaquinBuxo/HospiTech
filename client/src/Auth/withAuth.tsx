@@ -1,11 +1,12 @@
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import React,{FC} from 'react';
+import { useAuth0, Auth0ContextInterface, User } from '@auth0/auth0-react';
 import { CircularProgress } from '@mui/joy';
 import '../App.css';
 
-const withAuth = (Component) => {
-  return (props) => {
-    const Auth = useAuth0();
+
+const withAuth = (Component:React.FC) => {
+  return (props:any) => {
+    const Auth:Auth0ContextInterface<User> = useAuth0();
 
     // Loading...
     if (Auth.isLoading) {

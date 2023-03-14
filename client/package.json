@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/joy": "^5.0.0-alpha.69",
     "@testing-library/user-event": "^14.4.3",
+    "@types/auth0": "^2.35.11",
     "@types/jest": "^29.4.1",
     "@types/node": "^18.15.2",
     "es-abstract": "^1.21.1",

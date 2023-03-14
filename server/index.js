@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import router from './router.js';
 
-const PORT = 4000;
+const PORT = 4001;
 
 const app = new express();
 
