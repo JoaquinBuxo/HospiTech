@@ -19,6 +19,7 @@ build
 # misc
 .DS_Store
 .env
+.env.test
 .env.local
 .env.development.local
 .env.test.local
@@ -35,4 +36,8 @@ build
 *.sln
 *.sw?
 /client/src/App.jsx
+
+# Testing
+
+coverage/
 
