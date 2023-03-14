@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import * as ApiService from '../../utils/api';
-
+import { AuthProp,FilteredHospital,Hospital,userData } from '../../Typescript-Interfaces/Types';
 import { LocalHospital } from '@mui/icons-material';
 
 import {
@@ -15,17 +15,22 @@ import {
   Option,
 } from '@mui/joy';
 
-const UserRegister = ({ Auth }) => {
-  const [hospital, setHospital] = useState('');
-  const [hospitals, setHospitals] = useState([]);
-  const [open, setOpen] = useState(true);
+type Props = {
+  Auth: AuthProp;
+}
 
-  const handleHospitalChange = (newValue) => {
-    setHospital(newValue);
+const UserRegister = ({ Auth}:Props) => {
+  const [selectedHospitalid, setSelectedHospitalid] = useState<string|null>('');
+  const [hospitals, setHospitals] = useState<FilteredHospital[]>([]);
+  const [open, setOpen] = useState<boolean>(true);
+
+  const handleHospitalChange = (newValue: string | null) => {
+    console.log(selectedHospitalid);
+    setSelectedHospitalid(newValue);
   };
 
   const getHospitalsName = async () => {
-    const hospitals = await ApiService.getAllHospitals();
+    const hospitals:Hospital[] = await ApiService.getAllHospitals();
     const names = hospitals.map((hospital) => ({
       label: hospital.name,
       select: 'hospital',
@@ -36,12 +41,14 @@ const UserRegister = ({ Auth }) => {
 
   const handleSubmit = () => {
     try {
-      const userData = {
-        name: Auth.user.name,
-        email: Auth.user.email,
-        hospitalId: hospital,
-      };
-      ApiService.createUser(userData);
+      if (Auth.user) {
+        const newUser = {
+          name: Auth.user.name,
+          email: Auth.user.email,
+          hospitalId: selectedHospitalid,
+        };
+      ApiService.createUser(newUser);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +77,7 @@ const UserRegister = ({ Auth }) => {
                 <Select
                   startDecorator={<LocalHospital />}
                   placeholder='Select a Hospital'
-                  value={hospital}
+                  value={selectedHospitalid}
                   onChange={(e, newValue) => handleHospitalChange(newValue)}
                 >
                   {hospitals &&

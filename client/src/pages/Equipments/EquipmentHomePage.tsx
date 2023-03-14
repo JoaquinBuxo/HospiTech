@@ -2,24 +2,32 @@ import * as ApiService from "../../utils/api";
 import ListEquipments from "../../components/ListEquipments/ListEquipments";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import React, { useState, useEffect } from "react";
+import {
+  Equipment,
+  FilteredEquipment,
+  FilteredHospital,
+} from "../../Typescript-Interfaces/Types";
 // styles
 import "./Equipments.css";
+import { isNull } from "util";
 
 const EquipmentHomePage = function () {
-  const [equipments, setEquipments] = useState([]);
-  const [filterEquipments, setFilterEquipments] = useState([]);
-  const [filterHospitals, setFilterHospitals] = useState([]);
-  const [allEquipments, setAllEquipments] = useState([]);
+  const [equipments, setEquipments] = useState<Equipment[]>([]);
+  const [filterEquipments, setFilterEquipments] = useState<Equipment[]>([]);
+  const [filterHospitals, setFilterHospitals] = useState<Equipment[]>([]);
+  const [allEquipments, setAllEquipments] = useState<Equipment[]>([]);
 
   const getAllEquipments = async () => {
-    const equipments = await ApiService.getAllEquipments();
-    console.log(equipments);
+    const equipments: Equipment[] = await ApiService.getAllEquipments();
     setEquipments([...equipments]);
     setAllEquipments([...equipments]);
     return equipments;
   };
 
-  const handleSearchChange = (event, newValue) => {
+  const handleSearchChange = (
+    event: React.FormEvent<HTMLLinkElement>,
+    newValue: FilteredEquipment
+  ) => {
     if (!newValue) {
       setFilterEquipments([]);
     } else {
@@ -30,7 +38,10 @@ const EquipmentHomePage = function () {
     }
   };
 
-  const handleOrderChange = (event, newValue) => {
+  const handleOrderChange = (
+    event: React.FormEvent<HTMLLinkElement>,
+    newValue: FilteredEquipment
+  ) => {
     if (newValue) {
       newValue.label === "Last Added"
         ? equipments.sort(
@@ -43,7 +54,10 @@ const EquipmentHomePage = function () {
     }
   };
 
-  const handleHospitalChange = (event, newValue) => {
+  const handleHospitalChange = (
+    event: React.FormEvent<HTMLLinkElement>,
+    newValue: FilteredHospital
+  ) => {
     if (!newValue) {
       setFilterHospitals([]);
     } else {

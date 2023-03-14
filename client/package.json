@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest"
   },
@@ -17,16 +17,21 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/joy": "^5.0.0-alpha.69",
     "@testing-library/user-event": "^14.4.3",
+    "@types/auth0": "^2.35.11",
+    "@types/jest": "^29.4.1",
+    "@types/node": "^18.15.2",
     "es-abstract": "^1.21.1",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.2"
+    "react-router-dom": "^6.8.2",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-test-renderer": "^18.0.0",
     "@vitejs/plugin-react": "^3.1.0",
     "jsdom": "^21.1.1",
     "react-test-renderer": "^18.2.0",

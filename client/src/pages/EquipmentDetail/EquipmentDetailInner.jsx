@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './EquipmentDetailInner.css';
 import moment from 'moment';
@@ -12,7 +12,6 @@ const EquipmentDetailInner = () => {
 
   const getEquipment = async () => {
     const equipment = await ApiService.getEquipmentById(id);
-    console.log(equipment);
     setEquipment(equipment);
   };
 
