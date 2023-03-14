@@ -60,13 +60,12 @@ export type Transaction = {
   equipment: Equipment;
   equipmentId: string;
 };
-
-export type FilteredHospital = {
-  label: string;
-  select: string;
-  id: string;
-};
 export type FilteredEquipment = {
   label: string;
   select: string;
 };
+
+export type FilteredHospital = FilteredEquipment & {
+  id: string;
+};
+
