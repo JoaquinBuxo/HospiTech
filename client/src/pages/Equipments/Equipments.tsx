@@ -17,7 +17,8 @@ type Props = {
 const Equipments = ({ Auth }:Props) => {
   const [checkUser, setCheckUser] = useState<boolean>(true);
   const checkUserRegister = async () => {
-    const users:userData[] = await ApiService.getAllUsers();
+    const users: userData[] = await ApiService.getAllUsers();
+    console.log(users);
     const registered = users.some((el) => {
       if(Auth.user)
       return el.email === Auth.user.email

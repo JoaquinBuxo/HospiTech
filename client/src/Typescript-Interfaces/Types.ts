@@ -29,16 +29,16 @@ export type Equipment = {
 };
 export type Equipments = Equipment[];
 export type userData = {
-  name: string;
-  id: string;
-  email: string;
+  name: string|undefined;
+  id?: string;
+  email: string|undefined;
   password?: string;
   role?: string;
   image?: string;
-  hospitalId: string;
-  registrationDate: string;
+  hospitalId: string|null;
+  registrationDate?: string;
   accountStatus?: string;
-  Equipment: Equipment[];
+  Equipment?: Equipment[];
 };
 export type Hospital = {
   id: string;

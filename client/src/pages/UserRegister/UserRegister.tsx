@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import * as ApiService from '../../utils/api';
-import { AuthProp,FilteredHospital,Hospital } from '../../Typescript-Interfaces/Types';
+import { AuthProp,FilteredHospital,Hospital,userData } from '../../Typescript-Interfaces/Types';
 import { LocalHospital } from '@mui/icons-material';
 
 import {
@@ -20,12 +20,13 @@ type Props = {
 }
 
 const UserRegister = ({ Auth}:Props) => {
-  const [hospital, setHospital] = useState<string|null>('');
+  const [selectedHospitalid, setSelectedHospitalid] = useState<string|null>('');
   const [hospitals, setHospitals] = useState<FilteredHospital[]>([]);
   const [open, setOpen] = useState<boolean>(true);
-  
-  const handleHospitalChange = (newValue:string|null) => {
-    setHospital(newValue);
+
+  const handleHospitalChange = (newValue: string | null) => {
+    console.log(selectedHospitalid);
+    setSelectedHospitalid(newValue);
   };
 
   const getHospitalsName = async () => {
@@ -41,12 +42,12 @@ const UserRegister = ({ Auth}:Props) => {
   const handleSubmit = () => {
     try {
       if (Auth.user) {
-        const userData = {
+        const newUser = {
           name: Auth.user.name,
           email: Auth.user.email,
-          hospitalId: hospital,
+          hospitalId: selectedHospitalid,
         };
-        ApiService.createUser(userData);
+      ApiService.createUser(newUser);
       }
     } catch (error) {
       console.log(error);
@@ -76,7 +77,7 @@ const UserRegister = ({ Auth}:Props) => {
                 <Select
                   startDecorator={<LocalHospital />}
                   placeholder='Select a Hospital'
-                  value={hospital}
+                  value={selectedHospitalid}
                   onChange={(e, newValue) => handleHospitalChange(newValue)}
                 >
                   {hospitals &&
