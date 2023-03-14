@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import * as hospitalController from '../controllers/hospital.controller.js';
-import * as equipmentController from '../controllers/equipment.controller.js';
-import * as userController from '../controllers/user.controller.js';
+import * as hospitalController from '../controllers/hospital.controller';
+import * as equipmentController from '../controllers/equipment.controller';
+import * as userController from '../controllers/user.controller';
 
 const router = Router();
 

@@ -1,6 +1,8 @@
+import { Hospital } from '@prisma/client';
 import prisma from '../models/db';
+import { Request,Response } from 'express';
 
-const createHospital = async (hospital) => {
+const createHospital = async (hospital:Hospital) => {
   try {
     const createHospital = await prisma.hospital.create({
       data: hospital,
@@ -12,7 +14,7 @@ const createHospital = async (hospital) => {
   }
 };
 
-const getAllHospitals = async (req, res) => {
+const getAllHospitals = async (req:Request, res:Response) => {
   try {
     const getHopsitals = await prisma.hospital.findMany({});
     return getHopsitals;
@@ -21,7 +23,7 @@ const getAllHospitals = async (req, res) => {
   }
 };
 
-const getHospitalById = async (req, res) => {
+const getHospitalById = async (req:Request, res:Response) => {
   try {
     const hospital = await prisma.hospital.findUnique({
       where: { id: req.params.id },

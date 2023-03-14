@@ -1,7 +1,8 @@
-import prisma from '../models/db';
-import uploadImages from '../utils/uploadImages.js'; // todo - need testing for Cloudinary
+import { Equipment } from "@prisma/client";
+import prisma from "../models/db";
+import uploadImages from "../utils/uploadImages"; // todo - need testing for Cloudinary
 
-const createEquipment = async (equipment) => {
+const createEquipment = async (equipment:Equipment) => {
   try {
     const response = await prisma.equipment.create({
       data: equipment,
@@ -23,7 +24,7 @@ const getAllEquipments = async () => {
   }
 };
 
-const getEquipmentById = async (id) => {
+const getEquipmentById = async (id:string) => {
   try {
     const equipment = await prisma.equipment.findUnique({
       where: { id },

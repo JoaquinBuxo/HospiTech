@@ -1,8 +1,9 @@
+import { Request,Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import uploadImages from '../utils/uploadImages.js';
+import uploadImages from '../utils/uploadImages';
 const prisma = new PrismaClient();
 
-const createEquipment = async (req, res) => {
+const createEquipment = async (req:Request, res:Response) => {
   try {
     const imagesURL = await uploadImages(req.body.images);
     req.body.images = imagesURL;
@@ -19,7 +20,7 @@ const createEquipment = async (req, res) => {
   }
 };
 
-const getAllEquipments = async (req, res) => {
+const getAllEquipments = async (req:Request, res:Response) => {
   try {
     const getEquipments = await prisma.equipment.findMany();
     res.status(200);
@@ -30,7 +31,7 @@ const getAllEquipments = async (req, res) => {
   }
 };
 
-const getEquipmentById = async (req, res) => {
+const getEquipmentById = async (req:Request, res:Response) => {
   try {
     const equipment = await prisma.equipment.findUnique({
       where: { id: req.params.id },

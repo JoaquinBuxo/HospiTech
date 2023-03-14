@@ -1,18 +1,21 @@
-import prisma from '../models/db';
+import { PrismaClient } from '@prisma/client';
+import { Request,Response } from 'express';
+const prisma = new PrismaClient();
 
-const createUser = async (user) => {
+const createUser = async (req:Request, res:Response) => {
   try {
     const createUser = await prisma.user.create({
-      data: user,
+      data: req.body,
     });
-    return createUser;
+    res.status(200);
+    res.send(createUser);
   } catch (error) {
     console.log(error);
-    return { error };
+    res.status(300);
   }
 };
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req:Request, res:Response) => {
   try {
     const getUsers = await prisma.user.findMany();
     res.status(200);
@@ -23,7 +26,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
+const getUserById = async (req:Request, res:Response) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: req.params.id },
@@ -36,4 +39,4 @@ const getUserById = async (req, res) => {
   }
 };
 
-export default { createUser, getAllUsers, getUserById };
+export { createUser, getAllUsers, getUserById };

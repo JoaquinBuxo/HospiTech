@@ -1,8 +1,8 @@
-import app from '../../app.js';
+import app from '../../app';
 import request from 'supertest';
-import seedDb from './seedDb.js';
-import seedDbFunctions from '../../testing/db-seeding-functions.js';
-import * as mockData from '../../testing/mocks.js';
+import seedDb from './seedDb';
+import seedDbFunctions from '../../testing/db-seeding-functions';
+import * as mockData from '../../testing/mocks';
 
 const hospitalFields = ['id', 'name', 'address', 'email', 'phone', 'country'];
 
@@ -15,16 +15,14 @@ afterAll(async () => {
 });
 
 describe('/hospitals', () => {
-  let res;
-  beforeEach(async () => {
-    res = await request(app).get('/hospitals');
-  });
 
-  test('Returns status code 200 on success', () => {
+  test('Returns status code 200 on success',async () => {
+      const res = await request(app).get("/hospitals");
     expect(res.statusCode).toEqual(200);
   });
 
-  test('Returns array of hospitals', () => {
+  test('Returns array of hospitals', async() => {
+    const res = await request(app).get("/hospitals");
     expect(Array.isArray(res.body)).toBe(true);
     const hospitalKeys = Object.keys(res.body[0]);
     expect(hospitalKeys).toEqual(expect.arrayContaining(hospitalFields));
@@ -33,7 +31,6 @@ describe('/hospitals', () => {
 
 describe('/hospital/:id', () => {
   const mockHospital = mockData.mockHospital;
-
   test('Returns status code 200 on success', async () => {
     const res = await request(app).get(`/hospital/${mockHospital.id}`);
 
