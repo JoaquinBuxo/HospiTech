@@ -1,18 +1,14 @@
 import { vi, describe, test } from 'vitest';
+import { render } from '@testing-library/react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-
-import * as auth0 from '@auth0/auth0-react';
-
+import { AuthProp } from '../Typescript-Interfaces/Types';
 import Equipments from '../pages/Equipments/Equipments';
 
 vi.mock('@auth0/auth0-react');
-
-const renderComponent = (authResponse) => {
-  auth0.useAuth0 = vi.fn().mockReturnValue(authResponse);
-
-  const renderer = new ShallowRenderer();
-  renderer.render(<Equipments />);
-  const result = renderer.getRenderOutput();
+let mockUseAuth0:()=>void;
+const renderComponent = (authResponse:AuthProp) => {
+  mockUseAuth0 = vi.fn().mockReturnValue(authResponse);
+  const result = render(<Equipments />);
   return result;
 };
 
@@ -28,7 +24,7 @@ describe('Check authentication', () => {
 
   test('Authenticated called', () => {
     expect(result.type).toBe('div');
-    expect(auth0.useAuth0).toHaveBeenCalled();
+    expect(mockUseAuth0).toHaveBeenCalled();
   });
 
   test('Logged in', () => {

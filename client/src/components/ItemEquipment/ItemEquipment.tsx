@@ -1,10 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-
+import { EquipmentProp } from '../../Typescript-Interfaces/Types';
 import { Card, AspectRatio, CardOverflow, Divider, Typography } from '@mui/joy';
 import './ItemEquipment.css';
 
-const ItemEquipment = ({ equipment }) => {
+const ItemEquipment = ({ equipment }: EquipmentProp ) => {
   return (
     <Card variant='outlined' className='item-equipment'>
       <CardOverflow>
@@ -21,7 +21,7 @@ const ItemEquipment = ({ equipment }) => {
         {equipment.model}
       </Typography>
       <Typography level='body2' sx={{ mt: 0.5, mb: 2 }}>
-        {equipment.owner}
+        {equipment.ownerId}
       </Typography>
       <Divider />
       <CardOverflow

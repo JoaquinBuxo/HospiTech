@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import * as ApiService from '../../utils/api';
-
+import { AuthProp } from '../../Typescript-Interfaces/Types';
 import { LocalHospital } from '@mui/icons-material';
 
 import {
@@ -15,7 +15,11 @@ import {
   Option,
 } from '@mui/joy';
 
-const UserRegister = ({ Auth }) => {
+type Props = {
+  Auth: AuthProp;
+}
+
+const UserRegister = ({ Auth}:Props) => {
   const [hospital, setHospital] = useState('');
   const [hospitals, setHospitals] = useState([]);
   const [open, setOpen] = useState(true);

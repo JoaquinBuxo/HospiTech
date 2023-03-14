@@ -1,4 +1,3 @@
-import React,{FC} from 'react';
 import { useAuth0} from '@auth0/auth0-react';
 import { CircularProgress } from '@mui/joy';
 import '../App.css';

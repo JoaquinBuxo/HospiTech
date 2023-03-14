@@ -2,10 +2,17 @@ import { User } from "@auth0/auth0-react";
 
 export type AuthProp = {
   isAuthenticated: boolean;
-  user?:User
+  user?: User;
   loginWithRedirect: () => void;
   isLoading: boolean;
 };
+export type EquipmentsProp = {
+  equipments: Equipment[];
+};
+export type EquipmentProp = {
+  equipment: Equipment;
+};
+
 export type Equipment = {
   id: string;
   type: string;
@@ -68,4 +75,3 @@ export type FilteredEquipment = {
 export type FilteredHospital = FilteredEquipment & {
   id: string;
 };
-

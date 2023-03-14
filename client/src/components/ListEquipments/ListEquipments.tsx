@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import ItemEquipment from '../ItemEquipment/ItemEquipment';
 import './ListEquipments.css';
-
+import { EquipmentsProp,Equipment } from '../../Typescript-Interfaces/Types';
 import { Grid } from '@mui/joy';
 
-const ListEquipments = ({ equipments }) => {
+const ListEquipments = ({ equipments }:EquipmentsProp) => {
   return (
     <Grid
       container
@@ -13,7 +13,7 @@ const ListEquipments = ({ equipments }) => {
       sx={{ margin: 0, marginTop: 2.5 }}
     >
       {equipments &&
-        equipments.map((equipment) => (
+        equipments.map((equipment:Equipment) => (
 
           <Grid className="displayEquipment" key={equipment.id} xs={3}>
             <Link to={`/equipment-detail/${equipment.id}`}>
