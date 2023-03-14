@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import * as ApiService from '../../utils/api';
-import { AuthProp } from '../../Typescript-Interfaces/Types';
+import { AuthProp,FilteredHospital,Hospital } from '../../Typescript-Interfaces/Types';
 import { LocalHospital } from '@mui/icons-material';
 
 import {
@@ -20,16 +20,16 @@ type Props = {
 }
 
 const UserRegister = ({ Auth}:Props) => {
-  const [hospital, setHospital] = useState('');
-  const [hospitals, setHospitals] = useState([]);
-  const [open, setOpen] = useState(true);
-
-  const handleHospitalChange = (newValue) => {
+  const [hospital, setHospital] = useState<string|null>('');
+  const [hospitals, setHospitals] = useState<FilteredHospital[]>([]);
+  const [open, setOpen] = useState<boolean>(true);
+  
+  const handleHospitalChange = (newValue:string|null) => {
     setHospital(newValue);
   };
 
   const getHospitalsName = async () => {
-    const hospitals = await ApiService.getAllHospitals();
+    const hospitals:Hospital[] = await ApiService.getAllHospitals();
     const names = hospitals.map((hospital) => ({
       label: hospital.name,
       select: 'hospital',
@@ -40,12 +40,14 @@ const UserRegister = ({ Auth}:Props) => {
 
   const handleSubmit = () => {
     try {
-      const userData = {
-        name: Auth.user.name,
-        email: Auth.user.email,
-        hospitalId: hospital,
-      };
-      ApiService.createUser(userData);
+      if (Auth.user) {
+        const userData = {
+          name: Auth.user.name,
+          email: Auth.user.email,
+          hospitalId: hospital,
+        };
+        ApiService.createUser(userData);
+      }
     } catch (error) {
       console.log(error);
     }
