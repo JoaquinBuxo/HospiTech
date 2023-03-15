@@ -5,7 +5,13 @@ export type AuthProp = {
   user?: User;
   loginWithRedirect: () => void;
   isLoading: boolean;
+  logout: (params: AuthLogoutProps) => void;
 };
+export type AuthLogoutProps = {
+  returnTo: string;
+  clientId?: string;
+};
+
 export type EquipmentsProp = {
   equipments: Equipment[];
 };
