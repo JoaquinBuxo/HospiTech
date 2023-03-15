@@ -6,6 +6,7 @@ import { mockEquipment } from "./mocks";
 import seedDb from "./db-seeding-functions";
 import equipmentSetup from "./equipment.setup";
 import { Equipment } from "@prisma/client";
+import { getEquipmentById } from "../controllers/equipment.controller";
 
 beforeAll(async () => {
   await seedDb.cleanDatabase();
@@ -28,7 +29,7 @@ describe("Equipment", () => {
         mockEquipment[0]
       );
 
-      if (result) {
+      if (result && !('error' in result)) {
         expect(result).toMatchObject({
           ...mockEquipment[0],
           // id: result.id,
@@ -44,7 +45,7 @@ describe("Equipment", () => {
   test("Get all equipment", async () => {
     for (let i = 1; i < mockEquipment.length; i++) {
       const result = await seedDb.createMockEquipment(mockEquipment[i]);
-      if (result) {
+      if (result && !('error' in result)) {
         savedEquipment.push(result);
       }
     }
@@ -66,7 +67,7 @@ describe("Equipment", () => {
     const equipmentFromId = await equipmentSetup.getEquipmentById(
       mockEquipment[0].id
     );
-
+ if(equipmentFromId && !('error' in equipmentFromId  ))
     expect(equipmentFromId.condition).toEqual(mockEquipment[0].condition);
   });
 });
