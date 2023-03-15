@@ -5,8 +5,8 @@ import { AuthProp } from '../Typescript-Interfaces/Types';
 import Equipments from '../pages/Equipments/Equipments';
 
 vi.mock('@auth0/auth0-react');
-let mockUseAuth0:()=>void;
-const renderComponent = (authResponse:AuthProp) => {
+let mockUseAuth0: () => void;
+const renderComponent = (authResponse: AuthProp) => {
   mockUseAuth0 = vi.fn().mockReturnValue(authResponse);
   const result = render(<Equipments />);
   return result;

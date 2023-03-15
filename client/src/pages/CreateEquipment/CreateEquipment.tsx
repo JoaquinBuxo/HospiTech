@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
-import withAuth from "../../Auth/withAuth";
-import Navbar from "../../components/Navbar/Navbar";
-import CreateEquipmentForm from "./CreateEquipmentForm";
-import { CheckCircle, CloseRounded, Report } from "@mui/icons-material";
+import React, { useState } from 'react';
+import { AuthProp } from '../../Typescript-Interfaces/Types';
+import withAuth from '../../Auth/withAuth';
+import Navbar from '../../components/Navbar/Navbar';
+import CreateEquipmentForm from './CreateEquipmentForm';
+import { CheckCircle, CloseRounded, Report } from '@mui/icons-material';
 
-import {
-  Sheet,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  Typography,
-  Alert,
-  IconButton,
-} from "@mui/joy";
+import { Typography, Alert, IconButton } from '@mui/joy';
 
-import "./CreateEquipment.css";
+import './CreateEquipment.css';
 
-const CreateEquipment = ({ Auth }) => {
+type Props = {
+  Auth: AuthProp;
+};
+
+const CreateEquipment = ({ Auth }: Props) => {
+  if (!Auth.user) return;
+
   const email = Auth.user.email;
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [alertError, setAlertError] = useState(false);
@@ -27,10 +25,10 @@ const CreateEquipment = ({ Auth }) => {
       {alertSuccess && (
         <Alert
           key="Success"
-          sx={{ alignItems: "flex-start" }}
+          sx={{ alignItems: 'flex-start' }}
           startDecorator={React.cloneElement(<CheckCircle />, {
-            sx: { mt: "2px", mx: "4px" },
-            fontSize: "xl2",
+            sx: { mt: '2px', mx: '4px' },
+            fontSize: 'xl2',
           })}
           variant="soft"
           color="success"
@@ -46,10 +44,16 @@ const CreateEquipment = ({ Auth }) => {
           }
         >
           <div>
-            <Typography fontWeight="lg" mt={0.25}>
+            <Typography
+              fontWeight="lg"
+              mt={0.25}
+            >
               Success
             </Typography>
-            <Typography fontSize="sm" sx={{ opacity: 0.8 }}>
+            <Typography
+              fontSize="sm"
+              sx={{ opacity: 0.8 }}
+            >
               Equipment created correctly.
             </Typography>
           </div>
@@ -59,10 +63,10 @@ const CreateEquipment = ({ Auth }) => {
       {alertError && (
         <Alert
           key="Error"
-          sx={{ alignItems: "flex-start" }}
+          sx={{ alignItems: 'flex-start' }}
           startDecorator={React.cloneElement(<Report />, {
-            sx: { mt: "2px", mx: "4px" },
-            fontSize: "xl2",
+            sx: { mt: '2px', mx: '4px' },
+            fontSize: 'xl2',
           })}
           variant="soft"
           color="danger"
@@ -70,7 +74,7 @@ const CreateEquipment = ({ Auth }) => {
             <IconButton
               variant="soft"
               size="sm"
-              color="error"
+              color="danger"
               onClick={() => setAlertError(false)}
             >
               <CloseRounded />
@@ -78,16 +82,22 @@ const CreateEquipment = ({ Auth }) => {
           }
         >
           <div>
-            <Typography fontWeight="lg" mt={0.25}>
+            <Typography
+              fontWeight="lg"
+              mt={0.25}
+            >
               Error
             </Typography>
-            <Typography fontSize="sm" sx={{ opacity: 0.8 }}>
+            <Typography
+              fontSize="sm"
+              sx={{ opacity: 0.8 }}
+            >
               There was some error.
             </Typography>
           </div>
         </Alert>
       )}
-      <CreateEquipmentForm email={email} />
+      <CreateEquipmentForm email={email!} />
     </div>
   );
 };

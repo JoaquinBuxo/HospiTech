@@ -1,7 +1,7 @@
-import { useAuth0} from '@auth0/auth0-react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { CircularProgress } from '@mui/joy';
 import '../App.css';
-import { AuthProp} from '../Typescript-Interfaces/Types'
+import { AuthProp } from '../Typescript-Interfaces/Types';
 type Props = {
   Auth: AuthProp;
 };
@@ -14,7 +14,7 @@ const withAuth = (Component: ({ Auth }: Props) => JSX.Element) => {
       user: AuthResponse.user,
       loginWithRedirect: AuthResponse.loginWithRedirect,
       isLoading: AuthResponse.isLoading,
-      logout:AuthResponse.logout
+      logout: AuthResponse.logout,
     };
 
     // Loading...
@@ -38,7 +38,12 @@ const withAuth = (Component: ({ Auth }: Props) => JSX.Element) => {
       );
     } else {
       // Authenticated
-      return <Component {...prop} Auth={Auth} />;
+      return (
+        <Component
+          {...prop}
+          Auth={Auth}
+        />
+      );
     }
   };
 };
