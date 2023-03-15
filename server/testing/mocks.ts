@@ -1,11 +1,10 @@
 const mockHospital = {
-  id: 'hospitalId',
+  id: 'test',
   name: 'StPau',
   address: 'Barcelona',
   email: 'StPau@Barcelona.com',
   phone: '12345',
-  image:
-    'https://machbel.com/fotos/2014/12/Fachada-principal-del-Hospital-de-Sant-Pau-Visita-al-Hospital-de-Sant-Pau-modernismo-en-Barcelona-Catalu%C3%B1a-Espa%C3%B1a-by-machbel.jpg',
+  image:'https://machbel.com/fotos/2014/12/Fachada-principal-del-Hospital-de-Sant-Pau-Visita-al-Hospital-de-Sant-Pau-modernismo-en-Barcelona-Catalu%C3%B1a-Espa%C3%B1a-by-machbel.jpg',
   description: 'The most beautiful hospital ever built',
   country: 'Spain',
 };

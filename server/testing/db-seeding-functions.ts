@@ -1,8 +1,9 @@
-import prisma from '../models/db';
-import * as mockData from './mocks';
-import user from './user.setup';
-import hospital from './hospital.setup';
-import equipment from './equipment.setup';
+import prisma from "../models/db";
+import * as mockData from "./mocks";
+import user from "./user.setup";
+import hospital from "./hospital.setup";
+import equipment from "./equipment.setup";
+import { Equipment, Hospital } from "@prisma/client";
 
 const cleanDatabase = async () => {
   await prisma.equipment.deleteMany();
@@ -16,7 +17,7 @@ const createMockHospital = async () => {
     const hospCreated = await hospital.createHospital(mockData.mockHospital);
     return hospCreated;
   } catch (error) {
-    console.log('--- Error seeding mockHospital ---');
+    console.log("--- Error seeding mockHospital ---");
   }
 };
 
@@ -26,7 +27,7 @@ const createMockUser = async () => {
     const userCreated = await user.createUser(mockData.mockUser);
     return userCreated;
   } catch (error) {
-    console.log('--- Error seeding mockUser ---');
+    console.log("--- Error seeding mockUser ---");
   }
 };
 
@@ -38,7 +39,7 @@ const createMockEquipment = async (
     const equipCreated = await equipment.createEquipment(oneEquipment);
     return equipCreated;
   } catch (error) {
-    console.log('--- Error seeding mockEquipment ---');
+    console.log("--- Error seeding mockEquipment ---");
   }
 };
 

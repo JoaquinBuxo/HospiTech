@@ -17,7 +17,7 @@ afterAll(async () => {
 describe('/hospitals', () => {
 
   test('Returns status code 200 on success',async () => {
-      const res = await request(app).get("/hospitals");
+    const res = await request(app).get("/hospitals");
     expect(res.statusCode).toEqual(200);
   });
 
