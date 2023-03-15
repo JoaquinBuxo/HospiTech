@@ -8,11 +8,10 @@
     "server-install": "cd server && npm i",
     "client-install": "cd client && npm i",
     "install-all-deps": "concurrently \"npm i\" \"npm run server-install\" \"npm run client-install\"",
-    "server-dev": "cd server && concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "server-dev": "cd server && nodemon index.ts",
     "client-dev": "cd client && npm run dev",
     "db-ui": "cd server && npx prisma studio",
-    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
-    "tsc": "tsc"
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
   },
   "keywords": [],
   "author": "",
