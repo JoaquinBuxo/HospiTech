@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-migrate-postgres": "DOTENV_CONFIG_PATH=.env.test npx prisma migrate",
+    "test-reset-database": "prisma migrate dev . dotenv_config_path=.env.test",
+    "test-reset-database-2": "npx prisma migrate dev . dotenv_config_path=.env.test",
+    "test": "DOTENV_CONFIG_PATH=.env.test jest --setupFiles=dotenv/config",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "keywords": [],
   "author": "",
@@ -18,7 +24,19 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.3",
+    "@types/supertest": "^2.0.12",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "jest-mock-extended": "^3.0.3",
     "nodemon": "^2.0.21",
-    "prisma": "^4.11.0"
+    "prisma": "^4.11.0",
+    "supertest": "^6.3.3",
+    "typescript": "^4.9.5"
   }
 }

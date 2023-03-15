@@ -32,7 +32,7 @@ model User {
   password         String?
   role             String?
   image            String?
-  hospital         Hospital    @relation(fields: [hospitalId], references: [id])
+  hospital         Hospital    @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
   hospitalId       String
   registrationDate DateTime    @default(now())
   accountStatus    String?
@@ -47,13 +47,13 @@ model Equipment {
   description  String
   serialNumber String
   images       String[]
-  owner        Hospital      @relation(fields: [ownerId], references: [id])
+  owner        Hospital      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId      String
   createdAt    DateTime      @default(now())
   lastRevision DateTime?
   repairs      String[]
   Transaction  Transaction[]
-  createdBy    User          @relation(fields: [userId], references: [id])
+  createdBy    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
 }
 
