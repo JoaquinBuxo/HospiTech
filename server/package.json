@@ -6,12 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "test-migrate-postgres": "DOTENV_CONFIG_PATH=.env.test npx prisma migrate",
-    "test-reset-database": "prisma migrate dev . dotenv_config_path=.env.test",
-    "test-reset-database-2": "npx prisma migrate dev . dotenv_config_path=.env.test",
-    "test": "DOTENV_CONFIG_PATH=.env.test jest --setupFiles=dotenv/config",
-    "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+    "test": "DOTENV_CONFIG_PATH=.env.test jest --setupFiles=dotenv/config"
   },
   "keywords": [],
   "author": "",
