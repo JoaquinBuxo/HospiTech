@@ -40,3 +40,4 @@ build
 # Testing
 
 coverage/
+client/vite.config.ts.timestamp*
