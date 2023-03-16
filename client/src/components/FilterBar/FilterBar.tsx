@@ -7,16 +7,15 @@ import './FilterBar.css';
 import * as ApiService from '../../utils/api';
 import { Hospital, Equipment } from '../../Typescript-Interfaces/Types';
 
-type Props = {
-  handleSearchChange: () => void;
-  handleOrderChange: () => void;
-  handleHospitalChange: () => void;
-};
+import {
+  Filter,
+  AutocompleteHandleChange,
+} from '../../Typescript-Interfaces/Types';
 
-type Filter = {
-  id?: string;
-  label: string;
-  select: string;
+type Props = {
+  handleSearchChange: AutocompleteHandleChange;
+  handleOrderChange: AutocompleteHandleChange;
+  handleHospitalChange: AutocompleteHandleChange;
 };
 
 const FilterBar = ({

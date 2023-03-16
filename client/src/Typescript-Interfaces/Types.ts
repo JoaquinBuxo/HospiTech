@@ -87,3 +87,14 @@ export type FilteredEquipment = {
 export type FilteredHospital = FilteredEquipment & {
   id: string;
 };
+
+export type Filter = {
+  id?: string;
+  label: string;
+  select: string;
+};
+
+export type AutocompleteHandleChange = (
+  event: React.SyntheticEvent,
+  value: Filter | null
+) => void;
