@@ -4,10 +4,9 @@ import FilterBar from '../../components/FilterBar/FilterBar';
 import React, { useState, useEffect } from 'react';
 import {
   Equipment,
-  FilteredEquipment,
-  FilteredHospital,
+  AutocompleteHandleChange,
 } from '../../Typescript-Interfaces/Types';
-// styles
+
 import './Equipments.css';
 
 const EquipmentHomePage = function () {
@@ -32,26 +31,20 @@ const EquipmentHomePage = function () {
     return equipments;
   };
 
-  const handleSearchChange = (
-    event: React.FormEvent<HTMLLinkElement>,
-    newValue: FilteredEquipment
-  ) => {
-    if (!newValue) {
+  const handleSearchChange: AutocompleteHandleChange = (event, value) => {
+    if (!value) {
       setFilterEquipments([]);
     } else {
       const filterEquipment = allEquipments.filter(
-        (equipment) => newValue.label === equipment.model
+        (equipment) => value.label === equipment.model
       );
       setFilterEquipments((prevState) => [...prevState, ...filterEquipment]);
     }
   };
 
-  const handleOrderChange = (
-    event: React.FormEvent<HTMLLinkElement>,
-    newValue: FilteredEquipment
-  ) => {
-    if (newValue) {
-      newValue.label === 'Last Added'
+  const handleOrderChange: AutocompleteHandleChange = (event, value) => {
+    if (value) {
+      value.label === 'Last Added'
         ? equipments.sort(
             (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
           )
@@ -62,15 +55,12 @@ const EquipmentHomePage = function () {
     }
   };
 
-  const handleHospitalChange = (
-    event: React.FormEvent<HTMLLinkElement>,
-    newValue: FilteredHospital
-  ) => {
-    if (!newValue) {
+  const handleHospitalChange: AutocompleteHandleChange = (event, value) => {
+    if (!value) {
       setFilterHospitals([]);
     } else {
       const filterHospital = allEquipments.filter(
-        (equipment) => newValue.id === equipment.ownerId
+        (equipment) => value.id === equipment.ownerId
       );
       setFilterHospitals([...filterHospital]);
     }

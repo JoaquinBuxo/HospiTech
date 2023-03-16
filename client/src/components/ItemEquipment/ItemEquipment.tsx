@@ -1,51 +1,50 @@
-import React from 'react';
-import moment from 'moment';
-import { EquipmentProp } from '../../Typescript-Interfaces/Types';
-import { Card, AspectRatio, CardOverflow, Divider, Typography } from '@mui/joy';
-import './ItemEquipment.css';
+import moment from "moment";
+import { EquipmentProp } from "../../Typescript-Interfaces/Types";
+import { Card, AspectRatio, CardOverflow, Divider, Typography } from "@mui/joy";
+import "./ItemEquipment.css";
 
-const ItemEquipment = ({ equipment }: EquipmentProp ) => {
+const ItemEquipment = ({ equipment }: EquipmentProp) => {
   return (
-    <Card variant='outlined' className='item-equipment'>
+    <Card variant="outlined" className="item-equipment">
       <CardOverflow>
-        <AspectRatio ratio='2'>
+        <AspectRatio ratio="2">
           <img
-            className='img-equipment'
-            src={equipment.images[0]}
-            loading='lazy'
+            className="img-equipment"
+            src={`${equipment.images[0]}`}
+            loading="lazy"
             alt={equipment.model}
           />
         </AspectRatio>
       </CardOverflow>
-      <Typography level='h2' sx={{ fontSize: 'md', mt: 2 }}>
+      <Typography level="h2" sx={{ fontSize: "md", mt: 2 }}>
         {equipment.model}
       </Typography>
-      <Typography level='body2' sx={{ mt: 0.5, mb: 2 }}>
+      <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
         {equipment.ownerId}
       </Typography>
       <Divider />
       <CardOverflow
-        variant='soft'
+        variant="soft"
         sx={{
-          display: 'flex',
+          display: "flex",
           gap: 1.5,
           py: 1.5,
-          px: 'var(--Card-padding)',
-          bgcolor: 'background.level1',
+          px: "var(--Card-padding)",
+          bgcolor: "background.level1",
         }}
       >
         <Typography
-          level='body3'
-          sx={{ fontWeight: 'md', color: 'text.secondary' }}
+          level="body3"
+          sx={{ fontWeight: "md", color: "text.secondary" }}
         >
           Last revision:
         </Typography>
-        <Divider orientation='vertical' />
+        <Divider orientation="vertical" />
         <Typography
-          level='body3'
-          sx={{ fontWeight: 'md', color: 'text.secondary' }}
+          level="body3"
+          sx={{ fontWeight: "md", color: "text.secondary" }}
         >
-          {moment(equipment.lastRevision).format('LL')}
+          {moment(equipment.lastRevision).format("LL")}
         </Typography>
       </CardOverflow>
     </Card>

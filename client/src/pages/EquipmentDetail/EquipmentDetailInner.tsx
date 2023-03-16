@@ -28,7 +28,7 @@ const EquipmentDetailInner = () => {
           <div className="container-image-equipment">
             <img
               className="image-equipment"
-              src={equipment.images ? equipment.images[0] : 'No Img'}
+              src={equipment.images ? `${equipment.images[0]}` : 'No Img'}
               alt={equipment.model}
             />
           </div>

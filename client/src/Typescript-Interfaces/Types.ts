@@ -13,7 +13,7 @@ export type AuthLogoutProps = {
 };
 
 export type EquipmentsProp = {
-  equipments: Equipment[];
+  equipments: Equipments;
 };
 export type EquipmentProp = {
   equipment: Equipment;
@@ -28,8 +28,8 @@ export type Equipment = {
   serialNumber: string;
   images: (string | ArrayBuffer)[];
   ownerId: string;
-  createdAt: Date;
-  lastRevision: Date;
+  createdAt: string;
+  lastRevision: string;
   repairs: string[];
   userId: string;
 };
@@ -79,6 +79,7 @@ export type Transaction = {
 };
 
 export type FilteredEquipment = {
+  id?: string;
   label: string;
   select: string;
 };
@@ -86,3 +87,14 @@ export type FilteredEquipment = {
 export type FilteredHospital = FilteredEquipment & {
   id: string;
 };
+
+export type Filter = {
+  id?: string;
+  label: string;
+  select: string;
+};
+
+export type AutocompleteHandleChange = (
+  event: React.SyntheticEvent,
+  value: Filter | null
+) => void;

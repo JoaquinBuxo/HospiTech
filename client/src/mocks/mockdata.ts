@@ -1,14 +1,16 @@
+import { vi } from 'vitest';
+import { AuthLogoutProps, AuthProp } from '../Typescript-Interfaces/Types';
 export const mockEquipment = [
   {
     condition: 'TEST CONDITION 1',
-    createdAt: '2023-03-11T16:00:10.994Z',
+    createdAt: '2023-03-16T11:07:08.752Z',
     description: 'TEST DESCRIPTION 1',
     id: 'id1',
     images: ['TEST IMAGE 1'],
     lastRevision: '2023-03-06T00:00:00.000Z',
     model: 'TEST MODEL 1',
     ownerId: 'testid',
-    repairs: [],
+    repairs: [''],
     serialNumber: 'TEST SERIAL NUMBER 1',
     type: 'TEST TYPE 1',
     userId: 'user_id',
@@ -22,7 +24,7 @@ export const mockEquipment = [
     lastRevision: '2023-03-06T00:00:00.000Z',
     model: 'TEST MODEL 2',
     ownerId: 'testid',
-    repairs: [],
+    repairs: [''],
     serialNumber: 'TEST SERIAL NUMBER 2',
     type: 'TEST TYPE 2',
     userId: 'user_id',
@@ -54,3 +56,12 @@ export const mockHospital = [
     country: 'Spain',
   },
 ];
+const loginWithRedirect = vi.fn();
+const logout = vi.fn();
+export const mockAuth: AuthProp = {
+  isAuthenticated: true,
+  isLoading: true,
+  user: mockUser[0],
+  loginWithRedirect,
+  logout,
+};
