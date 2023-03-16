@@ -1,7 +1,5 @@
-import { CheckCircle, CloseRounded, Report } from "@mui/icons-material";
-import React, { useState, useEffect } from "react";
-import * as ApiService from "../../utils/api";
-import "./CreateEquipment.css";
+import React, { useState, useEffect } from 'react';
+import * as ApiService from '../../utils/api';
 import {
   Sheet,
   FormControl,
@@ -9,67 +7,89 @@ import {
   Input,
   Button,
   Typography,
-} from "@mui/joy";
+} from '@mui/joy';
+import moment from 'moment';
 
-const CreateEquipmentForm = function ({ email }) {
-  const [model, setModel] = useState("");
-  const [serialNumber, setSerialNumber] = useState("");
-  const [type, setType] = useState("");
-  const [condition, setCondition] = useState("");
-  const [description, setDescription] = useState("");
-  const [images, setImages] = useState([]);
-  const [lastRevision, setLastRevision] = useState("");
+import { Equipment, userData } from '../../Typescript-Interfaces/Types';
+
+type Props = {
+  email: string;
+};
+
+const CreateEquipmentForm = function ({ email }: Props) {
+  const [model, setModel] = useState('');
+  const [serialNumber, setSerialNumber] = useState('');
+  const [type, setType] = useState('');
+  const [condition, setCondition] = useState('');
+  const [description, setDescription] = useState('');
+  const [images, setImages] = useState<(string | ArrayBuffer)[]>([]);
+  const [lastRevision, setLastRevision] = useState('');
   const [alertError, setAlertError] = useState(false);
-  const [user, setUser] = useState({});
-  const presentDay = new Date(Date.now()).toLocaleString().split(",")[0];
-  console.log(presentDay);
+  const [user, setUser] = useState<userData | null>(null);
+  const dateNow = moment().format('YYYY-MM-DD');
 
-  const handleModelChange = (event) => {
+  const handleModelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setModel(event.target.value);
   };
 
-  const handleSerialNumberChange = (event) => {
+  const handleSerialNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setSerialNumber(event.target.value);
   };
 
-  const handleTypeChange = (event) => {
+  const handleTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setType(event.target.value);
   };
 
-  const handleConditionChange = (event) => {
+  const handleConditionChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setCondition(event.target.value);
   };
 
-  const handleDescriptionChange = (event) => {
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setDescription(event.target.value);
   };
 
-  const handleImagesChange = async (event) => {
+  const handleImagesChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const imagesSelected = event.target.files;
     previewImages(imagesSelected);
   };
 
   const getUser = async () => {
     const users = await ApiService.getAllUsers();
-    const user = users.find((el) => el.email === email);
+    const user = users.find((el: userData) => el.email === email);
     setUser(user);
   };
 
-  const previewImages = (imagesSelected) => {
-    const imgAsURL = Array.from(imagesSelected).map((image) => {
+  const previewImages = (imagesSelected: FileList | null) => {
+    console.log(previewImages);
+    if (!FileList) return;
+
+    Array.from(imagesSelected!).map((image) => {
       const reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onloadend = () => {
-        if (!Array.from(images).includes(reader.result)) {
-          setImages((prevState) => [...prevState, reader.result]);
-        } else {
-          console.log("This image its already!");
+        if (reader.result && typeof reader.result === 'string') {
+          const imageArr = Array.from(images);
+          if (!imageArr.includes(reader.result)) {
+            setImages((prevState) => [...prevState, reader.result!]);
+          } else {
+            console.log('This image already exists!');
+          }
         }
       };
     });
   };
 
-  const handleLastRevisionChange = (event) => {
+  const handleLastRevisionChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setLastRevision(event.target.value);
   };
 
@@ -77,23 +97,23 @@ const CreateEquipmentForm = function ({ email }) {
     getUser();
   }, []);
 
-  const handleSubmit = async (event) => {
-    // const user = await getUser();
-    console.log(user);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
-      const equipmentData = {
+      const equipmentData: Equipment = {
         model,
         serialNumber,
         type,
         condition,
         images,
         description,
-        ownerId: user.hospitalId,
-        userId: user.id,
+        repairs: [],
+        ownerId: user!.hospitalId!,
+        userId: user!.id!,
         lastRevision: new Date(lastRevision),
+        createdAt: new Date(),
       };
       ApiService.createEquipment(equipmentData);
-      setAlertSuccess(true);
+      // setAlertSuccess(true);
     } catch (error) {
       setAlertError(true);
       console.log(error);
@@ -105,21 +125,28 @@ const CreateEquipmentForm = function ({ email }) {
       <main>
         <Sheet
           sx={{
-            width: "50%",
-            mx: "auto",
+            width: '50%',
+            mx: 'auto',
             my: 4,
             py: 3,
             px: 2,
-            display: "flex",
-            flexDirection: "column",
+            display: 'flex',
+            flexDirection: 'column',
             gap: 2,
-            borderRadius: "sm",
+            borderRadius: 'sm',
           }}
           variant="outlined"
         >
-          <form onSubmit={handleSubmit} action="/equipments">
+          <form
+            onSubmit={handleSubmit}
+            action="/equipments"
+          >
             <div>
-              <Typography level="h4" component="h1" sx={{ mb: 2 }}>
+              <Typography
+                level="h4"
+                component="h1"
+                sx={{ mb: 2 }}
+              >
                 <span data-testid="title">Add New Equipment</span>
               </Typography>
             </div>
@@ -169,7 +196,10 @@ const CreateEquipmentForm = function ({ email }) {
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
               <FormLabel>Images</FormLabel>
-              <Button className="button" component="label">
+              <Button
+                className="button"
+                component="label"
+              >
                 UPLOAD
                 <input
                   data-testid="upload"
@@ -185,13 +215,13 @@ const CreateEquipmentForm = function ({ email }) {
               <div className="images-container">
                 {images &&
                   images.length > 0 &&
-                  images.map((image) => (
+                  images.map((image, i) => (
                     <img
                       className="img-upload"
-                      key={image}
-                      src={image}
+                      key={i}
+                      src={image.toString()}
                       alt="Chosen Image"
-                      style={{ height: "70px", objectFit: "contain" }}
+                      style={{ height: '70px', objectFit: 'contain' }}
                     />
                   ))}
               </div>
@@ -218,7 +248,7 @@ const CreateEquipmentForm = function ({ email }) {
                 autoComplete="off"
                 slotProps={{
                   input: {
-                    max: { presentDay },
+                    max: dateNow,
                   },
                 }}
               />
@@ -227,7 +257,7 @@ const CreateEquipmentForm = function ({ email }) {
             <Button
               className="button"
               type="submit"
-              sx={{ mt: 1, width: "100%" }}
+              sx={{ mt: 1, width: '100%' }}
               data-testid="addEquipment"
             >
               ADD EQUIPMENT

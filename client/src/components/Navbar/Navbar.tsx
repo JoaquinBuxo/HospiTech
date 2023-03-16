@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { AuthProp, AuthLogoutProps } from '../../Typescript-Interfaces/Types';
 import { Link as RouterLink } from 'react-router-dom';
 import { Avatar, Button, Menu, MenuItem, Link } from '@mui/joy';
 import './Navbar.css';
 
-const Navbar = ({ Auth }) => {
+type Props = {
+  Auth: AuthProp;
+};
+
+const Navbar = ({ Auth }: Props) => {
   // manage menu
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -43,7 +48,7 @@ const Navbar = ({ Auth }) => {
         aria-controls={open ? 'navbar-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        variant="text"
+        variant="plain"
         color="neutral"
         onClick={handleClick}
       >

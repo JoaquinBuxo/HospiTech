@@ -5,15 +5,32 @@ import { Search, LocalHospital, FilterList } from '@mui/icons-material';
 import './FilterBar.css';
 
 import * as ApiService from '../../utils/api';
+import { Hospital, Equipment } from '../../Typescript-Interfaces/Types';
 
-const FilterBar = (props) => {
-  const [equipments, setEquipments] = useState([]);
-  const [hospitals, setHospitals] = useState([]);
-  const [order, setOrder] = useState([]);
+type Props = {
+  handleSearchChange: () => void;
+  handleOrderChange: () => void;
+  handleHospitalChange: () => void;
+};
+
+type Filter = {
+  id?: string;
+  label: string;
+  select: string;
+};
+
+const FilterBar = ({
+  handleSearchChange,
+  handleOrderChange,
+  handleHospitalChange,
+}: Props) => {
+  const [equipments, setEquipments] = useState<Filter[]>([]);
+  const [hospitals, setHospitals] = useState<Filter[]>([]);
+  const [order, setOrder] = useState<Filter[]>([]);
 
   const getHospitalsName = async () => {
     const hospitals = await ApiService.getAllHospitals();
-    const names = hospitals.map((hospital) => ({
+    const names = hospitals.map((hospital: Hospital) => ({
       label: hospital.name,
       select: 'hospital',
       id: hospital.id,
@@ -23,11 +40,16 @@ const FilterBar = (props) => {
 
   const getEquipmentsName = async () => {
     const equipments = await ApiService.getAllEquipments();
-    const names = equipments.map((equipment) => equipment.model);
-    const filterNames = [...new Set(names)].map((name) => ({
-      label: name,
-      select: 'equipment',
-    }));
+    const names: string[] = equipments.map(
+      (equipment: Equipment) => equipment.model
+    );
+    const filterNames = [...new Set(names)].map((name) => {
+      return {
+        label: name,
+        select: 'equipment',
+      };
+    });
+
     setEquipments(filterNames);
   };
 
@@ -43,21 +65,21 @@ const FilterBar = (props) => {
   return (
     <Grid
       container
-      direction='row'
-      justifyContent='center'
-      alignItems='center'
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
       spacing={2}
       sx={{ margin: 0 }}
-      className='filter-bar'
+      className="filter-bar"
     >
       <Grid xs={3}>
         <FormControl>
           <FormLabel>Search</FormLabel>
           <Autocomplete
             startDecorator={<Search />}
-            placeholder='Search Equipment'
+            placeholder="Search Equipment"
             options={equipments}
-            onChange={props.handleSearchChange}
+            onChange={handleSearchChange}
           />
         </FormControl>
       </Grid>
@@ -66,9 +88,9 @@ const FilterBar = (props) => {
           <FormLabel>Order by</FormLabel>
           <Autocomplete
             startDecorator={<FilterList />}
-            placeholder='Order by...'
+            placeholder="Order by..."
             options={order}
-            onChange={props.handleOrderChange}
+            onChange={handleOrderChange}
           />
         </FormControl>
       </Grid>
@@ -77,9 +99,9 @@ const FilterBar = (props) => {
           <FormLabel>Filter Hospital</FormLabel>
           <Autocomplete
             startDecorator={<LocalHospital />}
-            placeholder='Hospital'
+            placeholder="Hospital"
             options={hospitals}
-            onChange={props.handleHospitalChange}
+            onChange={handleHospitalChange}
           />
         </FormControl>
       </Grid>
