@@ -1,11 +1,11 @@
-import { User } from '@auth0/auth0-react';
+import { User } from "@auth0/auth0-react";
 
 export type AuthProp = {
   isAuthenticated: boolean;
   user?: User;
   loginWithRedirect: () => void;
   isLoading: boolean;
-  logout: (params: AuthLogoutProps) => void;
+  logout?: (params: AuthLogoutProps) => void;
 };
 export type AuthLogoutProps = {
   returnTo: string;

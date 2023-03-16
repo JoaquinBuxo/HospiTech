@@ -29,6 +29,7 @@ const Equipments = ({ Auth }:Props) => {
     checkUserRegister();
   }, []);
   return (
+    <>
     <div className="equipments">
       {!checkUser && <UserRegister Auth={Auth} />}
       <Navbar Auth={Auth} />
@@ -36,6 +37,7 @@ const Equipments = ({ Auth }:Props) => {
         <EquipmentHomePage />
       </div>
     </div>
+ </>
   );
 };
 
