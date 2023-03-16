@@ -109,8 +109,8 @@ const CreateEquipmentForm = function ({ email }: Props) {
         repairs: [],
         ownerId: user!.hospitalId!,
         userId: user!.id!,
-        lastRevision: new Date(lastRevision),
-        createdAt: new Date(),
+        lastRevision: `${new Date(lastRevision)}`,
+        createdAt: `${new Date()}`,
       };
       ApiService.createEquipment(equipmentData);
       // setAlertSuccess(true);
