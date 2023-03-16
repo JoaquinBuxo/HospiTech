@@ -5,7 +5,7 @@ export type AuthProp = {
   user?: User;
   loginWithRedirect: () => void;
   isLoading: boolean;
-  logout?: (params: AuthLogoutProps) => void;
+  logout: (params: AuthLogoutProps) => void;
 };
 export type AuthLogoutProps = {
   returnTo: string;
@@ -13,7 +13,7 @@ export type AuthLogoutProps = {
 };
 
 export type EquipmentsProp = {
-  equipments: Equipment[];
+  equipments: Equipments;
 };
 export type EquipmentProp = {
   equipment: Equipment;
@@ -26,10 +26,10 @@ export type Equipment = {
   condition: string;
   description: string;
   serialNumber: string;
-  images: (string | ArrayBuffer)[];
+  images: string[];
   ownerId: string;
-  createdAt: Date;
-  lastRevision: Date;
+  createdAt:string;
+  lastRevision: string;
   repairs: string[];
   userId: string;
 };
