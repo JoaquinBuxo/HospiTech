@@ -1,4 +1,3 @@
-import React from "react";
 import moment from "moment";
 import { EquipmentProp } from "../../Typescript-Interfaces/Types";
 import { Card, AspectRatio, CardOverflow, Divider, Typography } from "@mui/joy";
@@ -11,7 +10,7 @@ const ItemEquipment = ({ equipment }: EquipmentProp) => {
         <AspectRatio ratio="2">
           <img
             className="img-equipment"
-            src={equipment.images[0]}
+            src={`${equipment.images[0]}`}
             loading="lazy"
             alt={equipment.model}
           />

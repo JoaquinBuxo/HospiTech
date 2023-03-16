@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import * as ApiService from '../../utils/api';
-import { AuthProp,FilteredHospital,Hospital,userData } from '../../Typescript-Interfaces/Types';
+import { AuthProp,Filter,Hospital,userData } from '../../Typescript-Interfaces/Types';
 import { LocalHospital } from '@mui/icons-material';
 
 import {
@@ -21,7 +21,7 @@ type Props = {
 
 const UserRegister = ({ Auth}:Props) => {
   const [selectedHospitalid, setSelectedHospitalid] = useState<string|null>('');
-  const [hospitals, setHospitals] = useState<FilteredHospital[]>([]);
+  const [hospitals, setHospitals] = useState<Filter[]>([]);
   const [open, setOpen] = useState<boolean>(true);
 
   const handleHospitalChange = (newValue: string | null) => {
