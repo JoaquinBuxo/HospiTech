@@ -1,15 +1,14 @@
-import * as ApiService from "../../utils/api";
-import ListEquipments from "../../components/ListEquipments/ListEquipments";
-import FilterBar from "../../components/FilterBar/FilterBar";
-import React, { useState, useEffect } from "react";
+import * as ApiService from '../../utils/api';
+import ListEquipments from '../../components/ListEquipments/ListEquipments';
+import FilterBar from '../../components/FilterBar/FilterBar';
+import React, { useState, useEffect } from 'react';
 import {
   Equipment,
   FilteredEquipment,
   FilteredHospital,
-} from "../../Typescript-Interfaces/Types";
+} from '../../Typescript-Interfaces/Types';
 // styles
-import "./Equipments.css";
-import { isNull } from "util";
+import './Equipments.css';
 
 const EquipmentHomePage = function () {
   const [equipments, setEquipments] = useState<Equipment[]>([]);
@@ -17,10 +16,19 @@ const EquipmentHomePage = function () {
   const [filterHospitals, setFilterHospitals] = useState<Equipment[]>([]);
   const [allEquipments, setAllEquipments] = useState<Equipment[]>([]);
 
+  useEffect(() => {
+    checkFilterValues();
+  }, [filterEquipments, filterHospitals]);
+
+  useEffect(() => {
+    getAllEquipments();
+  }, []);
+
   const getAllEquipments = async () => {
     const equipments: Equipment[] = await ApiService.getAllEquipments();
     setEquipments([...equipments]);
     setAllEquipments([...equipments]);
+    console.log(equipments);
     return equipments;
   };
 
@@ -43,7 +51,7 @@ const EquipmentHomePage = function () {
     newValue: FilteredEquipment
   ) => {
     if (newValue) {
-      newValue.label === "Last Added"
+      newValue.label === 'Last Added'
         ? equipments.sort(
             (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
           )
@@ -84,12 +92,6 @@ const EquipmentHomePage = function () {
     }
   };
 
-  useEffect(() => {
-    checkFilterValues();
-  }, [filterEquipments, filterHospitals]);
-  useEffect(() => {
-    getAllEquipments();
-  }, []);
   return (
     <>
       <FilterBar

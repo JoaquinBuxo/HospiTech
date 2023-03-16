@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as ApiService from '../../utils/api';
 import {
   Sheet,
@@ -23,10 +24,12 @@ const CreateEquipmentForm = function ({ email }: Props) {
   const [condition, setCondition] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState<(string | ArrayBuffer)[]>([]);
-  const [lastRevision, setLastRevision] = useState('');
+  const dateNow = moment().format('YYYY-MM-DD');
+  const [lastRevision, setLastRevision] = useState(dateNow);
   const [alertError, setAlertError] = useState(false);
   const [user, setUser] = useState<userData | null>(null);
-  const dateNow = moment().format('YYYY-MM-DD');
+
+  const navigate = useNavigate();
 
   const handleModelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setModel(event.target.value);
@@ -98,6 +101,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       const equipmentData: Equipment = {
         model,
@@ -112,7 +116,13 @@ const CreateEquipmentForm = function ({ email }: Props) {
         lastRevision: new Date(lastRevision),
         createdAt: new Date(),
       };
-      ApiService.createEquipment(equipmentData);
+      const response = ApiService.createEquipment(equipmentData);
+      if ('error' in response) {
+        // => Error - show error message
+      } else {
+        // => Success - navigate to home
+        navigate('/');
+      }
       // setAlertSuccess(true);
     } catch (error) {
       setAlertError(true);
@@ -139,7 +149,8 @@ const CreateEquipmentForm = function ({ email }: Props) {
         >
           <form
             onSubmit={handleSubmit}
-            action="/equipments"
+            data-test="form"
+            // action="/equipments"
           >
             <div>
               <Typography
@@ -159,6 +170,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
                 placeholder="Da Vinci Surgical System"
                 required
                 autoComplete="off"
+                data-test="model"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -170,6 +182,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
                 placeholder="IS23456787654"
                 required
                 autoComplete="off"
+                data-test="serialNumber"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -181,6 +194,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
                 placeholder="surgical"
                 required
                 autoComplete="off"
+                data-test="type"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -192,6 +206,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
                 placeholder="good"
                 required
                 autoComplete="off"
+                data-test="condition"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -203,6 +218,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
                 UPLOAD
                 <input
                   data-testid="upload"
+                  data-test="upload"
                   name="images"
                   hidden
                   accept="image/*"
@@ -212,7 +228,10 @@ const CreateEquipmentForm = function ({ email }: Props) {
                   autoComplete="off"
                 />
               </Button>
-              <div className="images-container">
+              <div
+                className="images-container"
+                data-test="image-container"
+              >
                 {images &&
                   images.length > 0 &&
                   images.map((image, i) => (
@@ -235,6 +254,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
                 placeholder="The Da Vinci System consists of a surgeon's console that is typically in the same room as the patient, and a patient-side cart with three to four interactive robotic arms (depending on the model) controlled from the console. The arms hold objects, and can act as scalpels, scissors, bovies, or graspers. The final arm controls the 3D cameras.[6] The surgeon uses the controls of the console to manoeuvre the patient-side cart's robotic arms. The system always requires a human operator."
                 required
                 autoComplete="off"
+                data-test="description"
               />
             </FormControl>
             <FormControl sx={{ mb: 1.5 }}>
@@ -251,6 +271,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
                     max: dateNow,
                   },
                 }}
+                data-test="lastRevision"
               />
             </FormControl>
 
@@ -259,6 +280,7 @@ const CreateEquipmentForm = function ({ email }: Props) {
               type="submit"
               sx={{ mt: 1, width: '100%' }}
               data-testid="addEquipment"
+              data-test="submit"
             >
               ADD EQUIPMENT
             </Button>

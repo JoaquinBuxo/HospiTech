@@ -95,6 +95,7 @@ const Navbar = ({ Auth }: Props) => {
           color="neutral"
           underline="none"
           to="/create-equipment"
+          data-test="new-equipment"
         >
           <MenuItem onClick={handleClose}>Add new equipment</MenuItem>
         </Link>
