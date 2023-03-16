@@ -1,11 +1,9 @@
-import { defineConfig } from 'cypress';
-import * as dotenv from 'dotenv';
+import { defineConfig } from "cypress";
+import * as dotenv from "dotenv";
 dotenv.config();
 export default defineConfig({
   e2e: {
     experimentalOriginDependencies: true,
-    chromeWebSecurity: true,
-    defaultCommandTimeout: 8000,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
