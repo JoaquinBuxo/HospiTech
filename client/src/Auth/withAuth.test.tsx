@@ -1,11 +1,11 @@
-import { vi, describe, test } from "vitest";
-import { AuthProp } from "../Typescript-Interfaces/Types";
-import * as ShallowRenderer from "react-test-renderer/shallow";
-import Equipments from "../pages/Equipments/Equipments";
-import * as auth0 from "@auth0/auth0-react";
-import { mockAuth } from "../mocks/mockdata";
+import { vi, describe, test, expect } from 'vitest';
+import { AuthProp } from '../Typescript-Interfaces/Types';
+import * as ShallowRenderer from 'react-test-renderer/shallow';
+import Equipments from '../pages/Equipments/Equipments';
+import * as auth0 from '@auth0/auth0-react';
+import { mockAuth } from '../mocks/mockdata';
 
-vi.mock("@auth0/auth0-react");
+vi.mock('@auth0/auth0-react');
 let mockUseAuth0: () => AuthProp;
 const renderComponent = (authResponse: AuthProp) => {
   // @ts-ignore
@@ -18,22 +18,22 @@ const renderComponent = (authResponse: AuthProp) => {
   }
 };
 
-describe("Check authentication", () => {
+describe('Check authentication', () => {
   let result = renderComponent(mockAuth)!;
-  test("Authenticated called", () => {
-    expect(result.type).toBe("div");
+  test('Authenticated called', () => {
+    expect(result.type).toBe('div');
     expect(auth0.useAuth0).toHaveBeenCalled();
   });
 
-  test("Logged in", () => {
-    expect(result.props.className).toBe("login-loading");
+  test('Logged in', () => {
+    expect(result.props.className).toBe('login-loading');
   });
 
-  test("Logged out", () => {
+  test('Logged out', () => {
     mockAuth.isAuthenticated = false;
     mockAuth.isLoading = false;
     result = renderComponent(mockAuth)!;
 
-    expect(result.props.className).toBe("logout-container");
+    expect(result.props.className).toBe('logout-container');
   });
 });

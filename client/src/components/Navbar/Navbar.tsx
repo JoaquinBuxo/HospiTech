@@ -1,6 +1,6 @@
 import { AuthProp } from '../../Typescript-Interfaces/Types';
 import './Navbar.css';
-import { NavBarDetails } from './NavBarDetails';
+import NavBarDetails from './NavBarDetails';
 
 type Props = {
   Auth: AuthProp;

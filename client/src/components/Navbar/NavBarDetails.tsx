@@ -1,27 +1,29 @@
-import { Link as RouterLink } from "react-router-dom";
-import { Avatar, Button, Menu, MenuItem, Link } from "@mui/joy";
-import {AuthLogoutProps } from "../../Typescript-Interfaces/Types";
-import { useState } from "react";
-import { User } from '@auth0/auth0-react'
-import "./Navbar.css";
+import { Link as RouterLink } from 'react-router-dom';
+import { Avatar, Button, Menu, MenuItem, Link } from '@mui/joy';
+import { AuthLogoutProps } from '../../Typescript-Interfaces/Types';
+import { useState } from 'react';
+import { User } from '@auth0/auth0-react';
+import './Navbar.css';
+
 type Props = {
-  user: User,
+  user: User;
   logout: (params: AuthLogoutProps) => void;
 };
-export const NavBarDetails = ({ user,logout }:Props) => {
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    const open = Boolean(anchorEl);
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorEl(event.currentTarget);
-    };
+const NavBarDetails = ({ user, logout }: Props) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const open = Boolean(anchorEl);
 
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    const logoutSession = () => {
-      logout({ returnTo: `${window.location.origin}` });
-    };
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const logoutSession = () => {
+    logout({ returnTo: `${window.location.origin}` });
+  };
   return (
     <>
       <div className="navbar">
@@ -30,7 +32,7 @@ export const NavBarDetails = ({ user,logout }:Props) => {
             component={RouterLink}
             underline="none"
             to="/equipments"
-            sx={{ height: "100%" }}
+            sx={{ height: '100%' }}
           >
             <img
               className="logo-img"
@@ -43,9 +45,9 @@ export const NavBarDetails = ({ user,logout }:Props) => {
         <Button
           id="menu-button"
           className="user-navbar"
-          aria-controls={open ? "navbar-menu" : undefined}
+          aria-controls={open ? 'navbar-menu' : undefined}
           aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
+          aria-expanded={open ? 'true' : undefined}
           variant="plain"
           color="neutral"
           onClick={handleClick}
@@ -60,7 +62,7 @@ export const NavBarDetails = ({ user,logout }:Props) => {
               />
             </>
           ) : (
-            "NO LOOGED"
+            'NO LOOGED'
           )}
         </Button>
         <Menu
@@ -103,3 +105,5 @@ export const NavBarDetails = ({ user,logout }:Props) => {
     </>
   );
 };
+
+export default NavBarDetails;
