@@ -1,4 +1,4 @@
-import { User } from '@auth0/auth0-react';
+import { User } from "@auth0/auth0-react";
 
 export type AuthProp = {
   isAuthenticated: boolean;
@@ -76,16 +76,6 @@ export type Transaction = {
   status?: string;
   equipment: Equipment;
   equipmentId: string;
-};
-
-export type FilteredEquipment = {
-  id?: string;
-  label: string;
-  select: string;
-};
-
-export type FilteredHospital = FilteredEquipment & {
-  id: string;
 };
 
 export type Filter = {
