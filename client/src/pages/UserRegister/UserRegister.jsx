@@ -15,6 +15,11 @@ import {
   Option,
 } from '@mui/joy';
 
+/**
+ * Component that allows the user to register with a hospital.
+ * @param {Object} Auth - The authentication object.
+ * @returns {JSX.Element} - The UserRegister component.
+ */
 const UserRegister = ({ Auth }) => {
   const [hospital, setHospital] = useState('');
   const [hospitals, setHospitals] = useState([]);

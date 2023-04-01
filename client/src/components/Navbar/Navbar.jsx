@@ -3,6 +3,10 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Avatar, Button, Menu, MenuItem, Link } from '@mui/joy';
 import './Navbar.css';
 
+/**
+ * Navbar component that displays the logo and user details with logout functionality
+ * @param {AuthData} Auth - The authentication data passed down from App component
+ */
 const Navbar = ({ Auth }) => {
   // manage menu
   const [anchorEl, setAnchorEl] = useState(null);

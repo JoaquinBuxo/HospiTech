@@ -6,6 +6,17 @@ import './FilterBar.css';
 
 import * as ApiService from '../../utils/api';
 
+/**
+ * A component that displays a filter bar with options to search, filter, and order
+ * equipment based on various criteria.
+ *
+ * @component
+ * @param {Object} props - The props object
+ * @param {function} props.handleSearchChange - A callback function to handle changes in the search input
+ * @param {function} props.handleOrderChange - A callback function to handle changes in the order select
+ * @param {function} props.handleHospitalChange - A callback function to handle changes in the hospital select
+ * @return {JSX.Element}
+ */
 const FilterBar = (props) => {
   const [equipments, setEquipments] = useState([]);
   const [hospitals, setHospitals] = useState([]);

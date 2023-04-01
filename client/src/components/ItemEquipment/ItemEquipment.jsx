@@ -4,6 +4,12 @@ import moment from 'moment';
 import { Card, AspectRatio, CardOverflow, Divider, Typography } from '@mui/joy';
 import './ItemEquipment.css';
 
+/**
+ * A card displaying information about an equipment item
+ * @param {Object} props - The props object
+ * @param {Object} props.equipment - The equipment object containing its details
+ * @returns {JSX.Element} - The component's markup
+ */
 const ItemEquipment = ({ equipment }) => {
   return (
     <Card variant='outlined' className='item-equipment'>

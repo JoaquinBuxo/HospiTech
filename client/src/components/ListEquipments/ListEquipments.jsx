@@ -5,6 +5,11 @@ import './ListEquipments.css';
 
 import { Grid } from '@mui/joy';
 
+/**
+ * Renders a list of equipment items.
+ * @param {Object[]} equipments - The list of equipment to be rendered.
+ * @returns {JSX.Element} - The JSX element representing the list of equipment.
+ */
 const ListEquipments = ({ equipments }) => {
   return (
     <Grid

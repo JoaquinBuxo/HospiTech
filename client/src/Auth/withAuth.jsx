@@ -3,6 +3,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { CircularProgress } from '@mui/joy';
 import '../App.css';
 
+/**
+ * A higher-order component that provides authentication-related props to the wrapped component.
+ * @param {React.Component} Component - The component to wrap.
+ * @returns {React.Component} The wrapped component.
+ */
 const withAuth = (Component) => {
   return (props) => {
     const Auth = useAuth0();

@@ -13,6 +13,11 @@ import './Equipments.css';
 // api
 import * as ApiService from '../../utils/api';
 
+/**
+ * Represents the Equipments component.
+ * @param {Object} Auth - The authenticated user object.
+ * @returns {JSX.Element} The Equipments component UI.
+ */
 const Equipments = ({ Auth }) => {
   const [equipments, setEquipments] = useState([]);
   const [filterEquipments, setFilterEquipments] = useState([]);

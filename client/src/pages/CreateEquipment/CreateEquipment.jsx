@@ -4,8 +4,8 @@ import withAuth from '../../Auth/withAuth';
 import Navbar from '../../components/Navbar/Navbar';
 import * as ApiService from '../../utils/api';
 
+// MUI
 import { CheckCircle, CloseRounded, Report } from '@mui/icons-material';
-
 import {
   Sheet,
   FormControl,
@@ -19,6 +19,11 @@ import {
 
 import './CreateEquipment.css';
 
+/**
+ * CreateEquipment component.
+ * @param {Object} Auth - The authentication object.
+ * @returns {JSX.Element} - The CreateEquipment component.
+ */
 const CreateEquipment = ({ Auth }) => {
   const [model, setModel] = useState('');
   const [serialNumber, setSerialNumber] = useState('');

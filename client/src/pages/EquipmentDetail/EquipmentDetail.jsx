@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import withAuth from '../../Auth/withAuth';
 import { useParams } from 'react-router-dom';
+import moment from 'moment';
+
+// components
+import withAuth from '../../Auth/withAuth';
 import Navbar from '../../components/Navbar/Navbar';
 import './EquipmentDetail.css';
-import moment from 'moment';
 
 // api
 import * as ApiService from '../../utils/api';
 
+/**
+ * EquipmentDetail component displays the details of a specific equipment.
+ *
+ * @param {Object} Auth - Object containing information about the authenticated user.
+ * @returns {JSX.Element} - JSX element representing the EquipmentDetail component.
+ */
 const EquipmentDetail = ({ Auth }) => {
   const [equipment, setEquipment] = useState({});
   const { id } = useParams();
