@@ -6,6 +6,15 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+/**
+ * Uploads an array of images to Cloudinary and returns an array of secure image URLs.
+ * @async
+ * @function
+ * @param {Array<string>} images - The array of images to be uploaded.
+ * @returns {Promise<Array<string>>} The array of secure image URLs.
+ * @throws {Error} If there is any error while uploading the images.
+ */
+
 const uploadImages = async (images) => {
   try {
     const imagesURL = [];
