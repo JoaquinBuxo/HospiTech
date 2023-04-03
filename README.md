@@ -18,7 +18,7 @@ HospiTech connects hospitals that have excess or unused medical equipment with h
   <p align="center">
     <img src="client/public/pictures/register.png" alt="Register" width="300" height="180">
     <img src="client/public/pictures/main-page.png" alt="Main page" width="300" height="180">
-    <img src="client/public/pictures/navbar.png" alt="Navbar" width="300" height="180">
+    <img src="client/public/pictures/navbar.png" alt="Navbar" width="300" height="260">
     <img src="client/public/pictures/create-equipment.png" alt="Create equipment" width="300" height="180">
     <img src="client/public/pictures/equipment-detail.png" alt="Equipment detail" width="300" height="180">
   </p>
